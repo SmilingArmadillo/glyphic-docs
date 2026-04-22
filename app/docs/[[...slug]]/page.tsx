@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <DocsPage toc={page.data.toc}>
+    <DocsPage toc={page.data.toc} tableOfContent={{ style: 'clerk' }} tableOfContentPopover={{ style: 'clerk' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
