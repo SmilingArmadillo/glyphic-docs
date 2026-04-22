@@ -1,8 +1,331 @@
 ---
 title: "@animate"
-description: Animate edges and nodes in your Mermaid diagram with flowing particles, pulsing borders, and status indicators.
+description: Animate edges and nodes in your Mermaid diagram with flowing particles, pulsing borders, and status indicator dots.
 ---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 # @animate
 
-Coming soon.
+The `@animate` block controls animations on individual edges and nodes. Each line targets either an edge (`A-->B`) or a node (`NodeId`).
+
+```text
+@animate
+Client-->Server: type=line-flow, color=#38bdf8, speed=2
+Server: type=node-pulse, pulseStyle=ripple, color=#ef4444, speed=1.4
+```
+
+<Tabs items={["Edge animations", "Node animations"]}>
+  <Tab value="Edge animations">
+
+## Edge animations
+
+```text
+@animate
+{from}-->{to}: type={type}, [param=value, ...]
+```
+
+<Accordions>
+  <Accordion title="type=line-flow — segment draws on, holds, then retracts">
+
+A segment of the edge animates: draws on, holds, then retracts and fades. Repeats indefinitely.
+
+```text
+@animate
+Client-->Server: type=line-flow, color=#38bdf8, speed=2, preset=balanced, glow=subtle
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Line segment color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration of one full cycle in seconds",
+      type: "number",
+      default: "1.5",
+    },
+    preset: {
+      description: "Motion character",
+      type: '"flash" | "balanced" | "long-hold"',
+      default: "balanced",
+    },
+    glow: {
+      description: "Blur filter around the segment",
+      type: '"none" | "subtle" | "strong"',
+      default: "none",
+    },
+  }}
+/>
+
+**Presets:**
+
+| Preset | Character |
+|--------|-----------|
+| `flash` | Short segment, fast travel — urgent, rapid traffic |
+| `balanced` | Medium segment, moderate speed — default working state |
+| `long-hold` | Long segment, slow travel — steady, high-volume throughput |
+
+  </Accordion>
+  <Accordion title="type=dot — small dot travels along the edge">
+
+```text
+@animate
+A-->B: type=dot, color=#f59e0b, speed=1.2
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Dot fill color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration per traversal in seconds",
+      type: "number",
+      default: "1.5",
+    },
+  }}
+/>
+
+  </Accordion>
+  <Accordion title="type=pill — rounded rectangle travels tangent-aligned">
+
+A rounded rectangle travels along the edge, rotating to stay tangent-aligned to the path direction. Supports an optional halo glow.
+
+```text
+@animate
+A-->B: type=pill, color=#4fc3f7, speed=1.5
+B-->C: type=pill, color=#7ee787, speed=1, glow=strong
+C-->D: type=pill, color=#f59e0b, speed=0.8, glow=subtle, width=24, height=12
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Pill fill color",
+      type: "CSS color",
+      default: "#4fc3f7",
+    },
+    speed: {
+      description: "Duration per full traversal in seconds",
+      type: "number",
+      default: "2",
+    },
+    glow: {
+      description: "Halo blur around the pill",
+      type: '"none" | "subtle" | "strong"',
+      default: "subtle",
+    },
+    width: {
+      description: "Pill length along the travel axis in px",
+      type: "number",
+      default: "28",
+    },
+    height: {
+      description: "Pill thickness in px; corner radius = height / 2",
+      type: "number",
+      default: "14",
+    },
+  }}
+/>
+
+<Callout type="info">
+Pills use the CSS Motion Path spec (`offset-path` + `offset-rotate: auto`) for tangent-aligned travel. They follow curves and diagonal edges and rotate to face the direction of travel at every point.
+</Callout>
+
+  </Accordion>
+</Accordions>
+
+  </Tab>
+  <Tab value="Node animations">
+
+## Node animations
+
+Node animations target a node by its ID (not an edge).
+
+<Accordions>
+  <Accordion title="type=node-pulse — pulsing border, fill, shadow, flash, or ripple">
+
+```text
+@animate
+{nodeId}: type=node-pulse, [param=value, ...]
+```
+
+```text
+@animate
+Server: type=node-pulse, pulseStyle=border, color=#ef4444, speed=1.5
+Server: type=node-pulse, pulseStyle=flash,  color=#ef4444, speed=1
+Server: type=node-pulse, pulseStyle=ripple, color=#ef4444, speed=1.4, rippleCount=3
+```
+
+<TypeTable
+  type={{
+    pulseStyle: {
+      description: "Visual effect",
+      type: '"border" | "fill" | "shadow" | "flash" | "ripple"',
+      default: "border",
+    },
+    color: {
+      description: "Pulse or ring color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration of one cycle in seconds",
+      type: "number",
+      default: "1.5",
+    },
+    rippleCount: {
+      description: "Number of staggered rings (ripple style only)",
+      type: "1 | 2 | 3",
+      default: "1",
+    },
+  }}
+/>
+
+**`pulseStyle` variants:**
+
+| Style | Effect | Use case |
+|-------|--------|----------|
+| `border` | Smooth opacity oscillation on a border ring | Persistent warning, attention state |
+| `fill` | Animates the fill opacity of the node shape | Highlighting, selection |
+| `shadow` | Border ring with Gaussian blur glow | Emphasis, "active" state |
+| `flash` | Hard on/off strobe | Urgent alert, error state |
+| `ripple` | Expanding rings radiate outward and fade | Broadcasting, active transmission |
+
+<Callout type="info">
+**`flash` color tip:** Choose a color that contrasts with the node's static border. If the flash color matches the existing `classDef` stroke or `@style outline` color, the strobe will be invisible.
+</Callout>
+
+  </Accordion>
+  <Accordion title="type=oval-inset — filled oval in the left cap of a stadium node">
+
+A filled oval injected into the left cap of a stadium (pill-shaped) node. Use with nodes declared using the `([text])` stadium syntax.
+
+```text
+@animate
+S1: type=oval-inset, color=#22c55e
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Fill color of the oval",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+  }}
+/>
+
+<Callout type="warn">
+The node must use stadium shape (`([NodeId])`) syntax in the flowchart. On standard rect-shaped nodes the oval will appear misaligned.
+</Callout>
+
+Combine with `classDef` for full control over border and fill:
+
+```text
+flowchart LR
+  S1([S1])
+  classDef serverNode fill:#052e16,stroke:#22c55e,stroke-width:2px,color:#e2e8f0
+  class S1 serverNode
+
+@animate
+S1: type=oval-inset, color=#22c55e
+```
+
+  </Accordion>
+  <Accordion title="type=status-dot — animated indicator dot on any node">
+
+A small animated dot injected into or adjacent to any node shape. Supports four animation styles and seven positions.
+
+```text
+@animate
+GW: type=status-dot, style=breathe, color=#22c55e, position=left, size=10
+Auth: type=status-dot, style=sonar, color=#f59e0b, position=left, rippleCount=2, label="Auth Service"
+Payment: type=status-dot, style=blink, color=#ef4444, position=left, label="Payment — down"
+legend dot: position=below-center, padding=16
+```
+
+<TypeTable
+  type={{
+    style: {
+      description: "Animation style",
+      type: '"breathe" | "blink" | "sonar" | "ripple"',
+      default: "breathe",
+    },
+    color: {
+      description: "Dot fill and ring color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    position: {
+      description: "Placement relative to the node",
+      type: '"left" | "right" | "top-left" | "top-right" | "top-center" | "left-inset" | "center"',
+      default: "left",
+    },
+    size: {
+      description: "Dot diameter in px",
+      type: "number",
+      default: "10",
+    },
+    speed: {
+      description: "One animation cycle duration in seconds",
+      type: "number",
+      default: "2",
+    },
+    rippleCount: {
+      description: "Number of staggered rings (sonar and ripple styles only)",
+      type: "1 | 2 | 3",
+      default: "1",
+    },
+    label: {
+      description: "Legend row text — omit to exclude from legend",
+      type: "string",
+      default: "—",
+    },
+  }}
+/>
+
+**Animation styles:**
+
+| Style | Effect | Use case |
+|-------|--------|----------|
+| `breathe` | Smooth opacity oscillation | Soft, persistent indicator |
+| `blink` | Hard on/off strobe | Urgent alert, error |
+| `sonar` | Expanding stroked rings | Broadcasting, active transmission |
+| `ripple` | Expanding filled semi-transparent rings | Softer broadcast |
+
+**`legend dot:` line**
+
+When present, renders a floating chip row showing nodes that have a `label=` value. Nodes without `label=` are omitted. The legend is not included in SVG/PNG exports.
+
+```text
+legend dot: position=below-center, padding=16
+```
+
+<TypeTable
+  type={{
+    position: {
+      description: "Legend panel anchor",
+      type: '"top-left" | "top-center" | "top-right" | "middle-left" | "middle-right" | "below-left" | "below-center" | "below-right"',
+      default: "below-center",
+    },
+    padding: {
+      description: "Offset from panel edge in px",
+      type: "number",
+      default: "12",
+    },
+  }}
+/>
+
+  </Accordion>
+</Accordions>
+
+  </Tab>
+</Tabs>
