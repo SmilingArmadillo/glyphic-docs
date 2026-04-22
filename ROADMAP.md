@@ -8,12 +8,12 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title                              | Label     | Status |
 |----|------------------------------------|-----------|--------|
-| #7 | feat: restructure docs and write full content (phases 1-4) | type: content | Open |
 
 ## Recently Closed
 
 | #  | Title                                               | Closed     |
 |----|-----------------------------------------------------|------------|
+| #7 | feat: restructure docs and write full content (phases 1-4) | 2026-04-22 |
 | #6 | Dark mode not working on docs site                  | 2026-04-22 |
 | #4 | Add blog section                                    | 2026-04-22 |
 | #3 | Match marketing site header styles in docs nav      | 2026-04-22 |
