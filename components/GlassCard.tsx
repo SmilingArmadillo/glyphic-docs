@@ -19,8 +19,8 @@ export default function GlassCard({ title, icon, children }: GlassCardProps) {
       }}
     >
       <div className="flex items-center gap-2 mb-2">
-        {icon && <span className="flex-shrink-0">{icon}</span>}
-        <span className="text-sm font-semibold text-[hsl(var(--foreground))]">{title}</span>
+        {icon && <span className="flex-shrink-0" aria-hidden="true">{icon}</span>}
+        <h3 className="text-sm font-semibold text-[hsl(var(--foreground))] m-0">{title}</h3>
       </div>
       <div className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed">
         {children}
