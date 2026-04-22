@@ -53,3 +53,7 @@ The Fumadocs page tree (sidebar structure) is auto-generated from the MDX file h
 ### Metadata & SEO
 
 Canonical URL base is `https://glyphic.cc`. Structured data (JSON-LD) for Organization and TechArticle is emitted in `app/layout.tsx`. Sitemap and robots.txt are generated via Next.js route handlers in `app/sitemap.ts` and `app/robots.ts`.
+
+## Documentation Authoring
+
+For all instructions on creating, editing, and deleting doc pages — including content structure, interactive components, source-of-truth rules, and the `_planned/` promotion workflow — see [`.claude/docs-workflow.md`](.claude/docs-workflow.md).
