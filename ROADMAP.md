@@ -14,5 +14,6 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title                                               | Closed     |
 |----|-----------------------------------------------------|------------|
+| #4 | Add blog section                                    | 2026-04-22 |
 | #3 | Match marketing site header styles in docs nav      | 2026-04-22 |
 | #2 | Style 'On this page' TOC with snake/timeline design | 2026-04-22 |
