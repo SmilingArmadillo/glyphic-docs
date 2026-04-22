@@ -3,6 +3,50 @@ title: Meta-blocks
 description: Glyphic extends Mermaid with meta-blocks — structured directives that add animation, status overlays, presentation labels, and split-view comparison without changing your Mermaid source.
 ---
 
+import { Card, Cards } from 'fumadocs-ui/components/card'
+
 # Meta-blocks
 
-Coming soon.
+Meta-blocks are Glyphic-specific extensions appended **after** the diagram definition. They use a simple keyword syntax:
+
+```text
+flowchart LR
+  A --> B --> C
+
+@animate
+A-->B: type=line-flow, color=#38bdf8, speed=2
+
+@present
+badge B: "Processing" type=info
+
+@compare split
+
+flowchart LR
+  A --> B
+
+@compare
+title before: "Before"
+title after: "After"
+```
+
+<Callout type="info">
+**Mermaid compatible.** Strip everything from the first `@` line downward and you have valid, portable Mermaid that renders in any standard renderer. Meta-blocks are purely additive.
+</Callout>
+
+## Directives
+
+<Cards>
+  <Card title="@animate" href="/docs/meta-blocks/animate" description="Animate edges with flowing particles and nodes with pulsing borders or status dots." />
+  <Card title="@style" href="/docs/meta-blocks/style" description="Set static visual styles on nodes — outline color and more." />
+  <Card title="@status" href="/docs/meta-blocks/status" description="Turn your diagram into a live NOC board by mapping nodes to health states." />
+  <Card title="@present" href="/docs/meta-blocks/present" description="Add badges to nodes and fixed text overlays on the canvas." />
+  <Card title="@compare" href="/docs/meta-blocks/compare" description="Show two diagram states side-by-side with optional diff highlighting." />
+</Cards>
+
+## Syntax rules
+
+- Meta-blocks follow the diagram definition — never before it
+- Each block opens with `@keyword` on its own line
+- Entries continue until the next `@keyword` or end of file
+- Meta-blocks are case-sensitive
+- Multiple meta-blocks can appear in the same file
