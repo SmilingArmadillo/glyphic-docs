@@ -1,13 +1,14 @@
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://glyphic.cc'
+const isDev = process.env.NODE_ENV === 'development'
+const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
 
 const FOOTER_COLUMNS = [
   {
     title: 'Product',
     links: [
-      { label: 'Editor', href: `${APP_URL}/app` },
-      { label: 'Examples', href: `${APP_URL}/examples` },
-      { label: 'Pricing', href: `${APP_URL}/pricing` },
-      { label: 'Changelog', href: `${APP_URL}/changelog` },
+      { label: 'Editor', href: app('/app') },
+      { label: 'Examples', href: app('/examples') },
+      { label: 'Pricing', href: app('/pricing') },
+      { label: 'Changelog', href: app('/changelog') },
     ],
   },
   {
@@ -31,10 +32,10 @@ const FOOTER_COLUMNS = [
   {
     title: 'Company',
     links: [
-      { label: 'Blog', href: `${APP_URL}/blog` },
-      { label: 'Use cases', href: `${APP_URL}/use-cases` },
-      { label: 'Privacy', href: `${APP_URL}/privacy` },
-      { label: 'Terms', href: `${APP_URL}/terms` },
+      { label: 'Blog', href: app('/blog') },
+      { label: 'Use cases', href: app('/use-cases') },
+      { label: 'Privacy', href: app('/privacy') },
+      { label: 'Terms', href: app('/terms') },
     ],
   },
 ]

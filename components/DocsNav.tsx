@@ -5,15 +5,16 @@ import { useTheme } from 'next-themes'
 import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://glyphic.cc'
+const isDev = process.env.NODE_ENV === 'development'
+const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
 
 const NAV_LINKS = [
-  { label: 'Product', href: `${APP_URL}/#features` },
+  { label: 'Product', href: app('/#features') },
   { label: 'Docs', href: '/docs' },
-  { label: 'Examples', href: `${APP_URL}/examples` },
-  { label: 'Use cases', href: `${APP_URL}/use-cases` },
-  { label: 'Blog', href: `${APP_URL}/blog` },
-  { label: 'Pricing', href: `${APP_URL}/pricing` },
+  { label: 'Examples', href: app('/examples') },
+  { label: 'Use cases', href: app('/use-cases') },
+  { label: 'Blog', href: app('/blog') },
+  { label: 'Pricing', href: app('/pricing') },
 ]
 
 function ThemeToggle() {
@@ -45,7 +46,7 @@ export default function DocsNav() {
   return (
     <header className="flex items-center justify-between px-6 h-14 bg-[#FAF9F4] dark:bg-[#0F0F0F] border-b border-[#E5E3DA] dark:border-[#2A2A2A]">
       <div className="flex items-center gap-6">
-        <a href={APP_URL} className="flex items-center">
+        <a href={app('/')} className="flex items-center">
           <Image src="/glyphic-header-light.svg" alt="Glyphic" width={186} height={30} className="dark:hidden" />
           <Image src="/glyphic-header-dark.svg" alt="Glyphic" width={186} height={30} className="hidden dark:block" />
         </a>
@@ -72,13 +73,13 @@ export default function DocsNav() {
       <div className="flex items-center gap-3">
         <ThemeToggle />
         <a
-          href={`${APP_URL}/login`}
+          href={app('/login')}
           className="text-sm font-medium text-[#6B6B6B] dark:text-[#9CA3AF] hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-colors"
         >
           Login
         </a>
         <a
-          href={`${APP_URL}/app`}
+          href={app('/app')}
           className="px-4 py-2 text-sm font-medium text-white bg-[#6366F1] rounded-full transition-[transform,box-shadow] duration-150 ease-out hover:scale-[1.02] hover:shadow-sm active:scale-[0.98]"
         >
           Open editor →
