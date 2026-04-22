@@ -6,16 +6,16 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 ## Open Issues
 
-| #  | Title                                 | Label     | Status |
-|----|---------------------------------------|-----------|--------|
-| #8 | fix: dark mode text legibility issues | type: bug | Open   |
+| #  | Title | Label | Status |
+|----|-------|-------|--------|
 
 ## Recently Closed
 
-| #  | Title                                               | Closed     |
-|----|-----------------------------------------------------|------------|
+| #  | Title                                                      | Closed     |
+|----|------------------------------------------------------------|------------|
+| #8 | fix: dark mode text legibility issues                      | 2026-04-22 |
 | #7 | feat: restructure docs and write full content (phases 1-4) | 2026-04-22 |
-| #6 | Dark mode not working on docs site                  | 2026-04-22 |
-| #4 | Add blog section                                    | 2026-04-22 |
-| #3 | Match marketing site header styles in docs nav      | 2026-04-22 |
-| #2 | Style 'On this page' TOC with snake/timeline design | 2026-04-22 |
+| #6 | Dark mode not working on docs site                         | 2026-04-22 |
+| #4 | Add blog section                                           | 2026-04-22 |
+| #3 | Match marketing site header styles in docs nav             | 2026-04-22 |
+| #2 | Style 'On this page' TOC with snake/timeline design        | 2026-04-22 |
