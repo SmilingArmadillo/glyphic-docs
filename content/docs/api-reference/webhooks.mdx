@@ -1,0 +1,50 @@
+---
+title: Webhooks
+description: Receive real-time notifications when shares are created or diagrams are rendered via the Glyphic API.
+---
+
+# Webhooks
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Configure webhooks on your [Dashboard](https://glyphic.cc/dashboard) under **Settings → Webhooks**.
+
+## Supported events
+
+| Event | Trigger |
+|---|---|
+| `share.created` | A new share is created via the API or editor |
+| `share.viewed` | A view-only share is opened |
+| `render.completed` | A server-side render finishes |
+
+## Payload format
+
+All webhook payloads use this envelope:
+
+```json
+{
+  "event": "share.created",
+  "timestamp": "2026-04-22T12:00:00Z",
+  "data": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "type": "editable",
+    "background": "dark"
+  }
+}
+```
+
+## Verifying signatures
+
+Glyphic signs every webhook with `HMAC-SHA256`. The signature is in the `X-Glyphic-Signature` header:
+
+```bash
+echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET"
+```
+
+Compare this to the header value. Reject requests where they don't match.
+
+| Header | Value |
+|---|---|
+| `X-Glyphic-Signature` | `sha256=<hex-digest>` |
+| `X-Glyphic-Event` | Event name, e.g. `share.created` |
+| `Content-Type` | `application/json` |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.

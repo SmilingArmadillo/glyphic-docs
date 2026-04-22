@@ -1,0 +1,56 @@
+---
+title: Animations and Transitions
+description: The complete reference for @animate, @present, and @compare — Glyphic's meta-block animation system.
+---
+
+# Animations and Transitions
+
+## @animate
+
+Animate edges sequentially or simultaneously.
+
+```
+@animate
+  A -> B: duration=1s delay=0
+  B -> C: duration=1s delay=1s type=pill
+@end
+```
+
+### Animation parameters
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `duration` | `Ns` or `Nms` | `1s` | How long the particle travels the edge |
+| `delay` | `Ns` or `Nms` | `0` | When the animation starts |
+| `type` | `dot` or `pill` or `dash` | `dot` | Particle shape |
+| `color` | hex | accent color | Particle color |
+
+## @present
+
+Overlay callouts and highlights for presentation mode.
+
+```
+@present
+  step 1: highlight A "Entry point"
+  step 2: highlight B "Processing layer"
+  step 3: callout C "This is the bottleneck"
+@end
+```
+
+## @compare
+
+Show a before/after split view.
+
+```
+@compare
+before:
+  flowchart TD
+    A --> B
+after:
+  flowchart TD
+    A --> B
+    A --> C
+@end
+```
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.

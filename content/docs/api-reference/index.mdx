@@ -1,0 +1,34 @@
+---
+title: API Reference
+description: Complete reference for the Glyphic HTTP API — authentication, editor operations, rendering, and webhooks.
+---
+
+# API Reference
+
+The Glyphic API is a REST API served at `https://glyphic.cc/api`.
+
+## Base URL
+
+```
+https://glyphic.cc/api
+```
+
+## Authentication
+
+All API requests require a bearer token in the `Authorization` header:
+
+```
+Authorization: Bearer <your-api-key>
+```
+
+## Endpoints
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/shares` | Create a share (editable or view-only) |
+| `GET` | `/shares/:id` | Retrieve an editable share payload |
+| `GET` | `/shares/:id/render` | Retrieve a view-only rendered SVG |
+| `POST` | `/prettify/:renderer` | Prettify via named renderer |
+| `POST` | `/render` | Render Mermaid source server-side |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
