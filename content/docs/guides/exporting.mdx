@@ -3,6 +3,45 @@ title: Exporting
 description: Export your diagram as SVG, PNG, GIF, or WebM. Each format has a different use case.
 ---
 
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
+
 # Exporting
 
-Coming soon.
+Click **Export** in the toolbar to download your diagram. Animated exports capture the running animation from the preview.
+
+## Formats
+
+<Accordions>
+  <Accordion title="SVG — scalable, embeddable">
+
+SVG exports the diagram as a scalable vector graphic. The file is self-contained and can be embedded in HTML, Markdown (GitHub, Notion), or any docs platform.
+
+**Best for:** Documentation, READMEs, web pages.
+
+**Note:** SVG exports are static — animations and meta-block effects are not included.
+
+  </Accordion>
+  <Accordion title="PNG — raster image">
+
+PNG exports the diagram as a fixed-resolution raster image.
+
+**Best for:** Slide decks, PR comments, screenshots.
+
+**Note:** PNG exports are static.
+
+  </Accordion>
+  <Accordion title="GIF — animated, universal">
+
+GIF captures the running animation from the preview panel and exports it as a looping animated GIF.
+
+**Best for:** Sharing animations in contexts that don't support video (email, Jira, GitHub issues).
+
+  </Accordion>
+  <Accordion title="WebM — high-quality animated video">
+
+WebM captures the running animation as a high-quality video file.
+
+**Best for:** Notion embeds, Loom uploads, presentations where video quality matters.
+
+  </Accordion>
+</Accordions>

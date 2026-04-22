@@ -3,6 +3,88 @@ title: Sharing
 description: Share your diagram as an editable link or a view-only embed. Learn the difference and how to generate each.
 ---
 
+import { Steps, Step } from 'fumadocs-ui/components/steps'
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
+
 # Sharing
 
-Coming soon.
+Glyphic has two share modes:
+
+| Mode | Who can edit | Source visible to viewer |
+|------|-------------|--------------------------|
+| Editable | Anyone with the link | Yes |
+| View Only | No one (read-only) | No — rendered server-side |
+
+## Creating a share link
+
+<Steps>
+  <Step>
+
+## Open the Share modal
+
+Click **Share** in the toolbar.
+
+  </Step>
+  <Step>
+
+## Choose a mode
+
+Select **Editable** or **View Only**.
+
+  </Step>
+  <Step>
+
+## Copy the link
+
+Copy the generated URL. Anyone with the link can open the diagram.
+
+  </Step>
+</Steps>
+
+## Embedding
+
+<Tabs items={["Script tag", "iframe"]}>
+  <Tab value="Script tag">
+
+Use the `embed.js` loader for Notion, Confluence, or any page that allows `<script>` tags:
+
+```html
+<script src="https://glyphic.cc/embed.js"
+  data-src="YOUR_SHARE_ID"
+  data-theme="dark">
+</script>
+```
+
+The script reads its own `data-*` attributes and replaces itself with an `<iframe>`.
+
+| Attribute | Default | Description |
+|-----------|---------|-------------|
+| `data-src` | required | Share ID from the share URL |
+| `data-theme` | `dark` | Theme hint |
+| `data-width` | `800` | iframe width (px or %) |
+| `data-height` | `500` | iframe height (px) |
+
+  </Tab>
+  <Tab value="iframe">
+
+For full control, use the `<iframe>` directly:
+
+```html
+<iframe
+  src="https://glyphic.cc/embed/YOUR_SHARE_ID"
+  width="800"
+  height="500"
+  frameborder="0">
+</iframe>
+```
+
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+The embed URL (`/embed/YOUR_SHARE_ID`) renders a chromeless version of the shared diagram — no header, no toolbar, no zoom controls. All meta-blocks (`@animate`, `@present`, `@compare`) work identically to the full editor view.
+</Callout>
+
+<Callout type="warn">
+GitHub READMEs block iframes. A static `preview.svg` badge endpoint is planned.
+</Callout>
