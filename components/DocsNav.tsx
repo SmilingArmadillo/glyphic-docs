@@ -30,9 +30,9 @@ export default function DocsNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? 'text-[#6366F1] font-medium'
+                    ? 'text-[#1A1A1A] dark:text-[#F5F5F0]'
                     : 'text-[#6B6B6B] dark:text-[#9CA3AF] hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0]'
                 }`}
               >
@@ -46,13 +46,13 @@ export default function DocsNav() {
       <div className="flex items-center gap-3">
         <Link
           href="https://glyphic.cc/login"
-          className="text-sm text-[#6B6B6B] dark:text-[#9CA3AF] hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-colors"
+          className="text-sm font-medium text-[#6B6B6B] dark:text-[#9CA3AF] hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-colors"
         >
           Login
         </Link>
         <Link
           href="https://glyphic.cc/app"
-          className="px-4 py-1.5 text-sm font-medium text-white bg-[#6366F1] hover:bg-[#4F46E5] rounded-full transition-colors"
+          className="px-4 py-2 text-sm font-medium text-white bg-[#6366F1] rounded-full transition-[transform,box-shadow] duration-150 ease-out hover:scale-[1.02] hover:shadow-sm active:scale-[0.98]"
         >
           Open editor →
         </Link>
