@@ -1,0 +1,26 @@
+---
+title: CRM sync improvements
+description: Faster sync, better deduplication, and smarter conflict resolution across all supported CRMs.
+date: "2025-03-30"
+tag: update
+---
+
+## What changed
+
+We've overhauled the CRM sync engine. The headline numbers: sync latency is down by ~60%, and duplicate contact records are down by over 80% for workspaces with multiple data sources.
+
+## Faster sync
+
+Previously, a full sync on a large workspace (10k+ contacts) could take several minutes. The new engine syncs incrementally — only records that have changed since the last sync are processed. Most workspaces now stay current within 30 seconds.
+
+## Better deduplication
+
+The old deduplication logic matched records on email address alone. The new logic uses a weighted scoring model across email, phone number, company domain, and name similarity. Edge cases that used to create duplicates — like a contact with two email addresses — are now handled correctly.
+
+## Conflict resolution
+
+When the same field is updated in both Glyphic and your CRM within the same sync window, Glyphic now surfaces the conflict in the activity feed rather than silently overwriting one value. You can review and resolve conflicts from **Settings → Sync → Conflicts**.
+
+## Supported CRMs
+
+These improvements apply to all supported CRMs: Salesforce, HubSpot, Pipedrive, and Attio.

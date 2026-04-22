@@ -1,0 +1,74 @@
+---
+title: Using the Activity API for custom dashboards
+description: A step-by-step guide to pulling call and email data from Glyphic into your own BI tool or dashboard.
+date: "2025-04-10"
+tag: tutorial
+---
+
+## Overview
+
+The Glyphic Activity API gives you programmatic access to all call and email activity logged in your workspace. This guide walks through fetching that data and wiring it into a custom dashboard — whether that's Metabase, Looker, a React app, or a simple spreadsheet.
+
+## Prerequisites
+
+- A Glyphic workspace with at least one connected CRM
+- An API key (generate one at **Settings → API → New key**)
+
+## Fetching activity
+
+The `/v1/activities` endpoint returns a paginated list of all logged events:
+
+```bash
+curl https://api.glyphic.cc/v1/activities \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -G \
+  --data-urlencode "after=2025-01-01T00:00:00Z" \
+  --data-urlencode "limit=100"
+```
+
+Each activity object looks like:
+
+```json
+{
+  "id": "act_01j2k...",
+  "type": "call",
+  "occurred_at": "2025-04-09T14:23:00Z",
+  "duration_seconds": 847,
+  "contact_id": "con_01j1m...",
+  "deal_id": "deal_01j0p...",
+  "summary": "Discussed pricing and next steps."
+}
+```
+
+## Filtering by type
+
+Use the `type` query parameter to filter to just calls or just emails:
+
+```bash
+# Calls only
+curl "https://api.glyphic.cc/v1/activities?type=call" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Emails only
+curl "https://api.glyphic.cc/v1/activities?type=email" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Pagination
+
+The response includes a `next_cursor` field. Pass it as `cursor` on the next request to fetch the next page:
+
+```bash
+curl "https://api.glyphic.cc/v1/activities?cursor=eyJpZCI6..." \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+Keep paginating until `next_cursor` is `null`.
+
+## Connecting to Metabase
+
+1. Write a small script that fetches all pages and inserts rows into a PostgreSQL table.
+2. Schedule it with a cron job (every 15 minutes works well for most teams).
+3. Point Metabase at the table and build your charts.
+
+The [Glyphic API reference](/docs/api-reference) has the full schema for every activity type.

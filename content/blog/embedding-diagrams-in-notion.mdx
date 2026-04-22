@@ -1,0 +1,38 @@
+---
+title: Embedding Glyphic diagrams in Notion
+description: Keep your architecture diagrams live and in sync inside your Notion docs using the Glyphic embed block.
+date: "2025-03-14"
+tag: tutorial
+---
+
+## Why embed instead of screenshot
+
+Screenshots of diagrams go stale the moment something changes. With a Glyphic embed, your Notion doc always shows the current version of the diagram — no manual updates needed.
+
+## Getting the embed URL
+
+1. Open the diagram you want to embed in Glyphic.
+2. Click **Share** in the top-right corner.
+3. Toggle **Public link** on.
+4. Copy the **Embed URL** (it looks like `https://glyphic.cc/embed/d/abc123`).
+
+## Adding the embed to Notion
+
+1. In Notion, type `/embed` and select **Embed**.
+2. Paste the Glyphic embed URL.
+3. Click **Embed link**.
+
+Notion will render the diagram inline. It's interactive — viewers can pan and zoom without leaving Notion.
+
+## Controlling access
+
+By default, anyone with the Notion page link can view the embedded diagram. If your Notion workspace is internal-only, this is fine — the embed respects the Notion page permissions.
+
+If you need tighter control:
+
+- Toggle **Public link** off to make the embed private. Only logged-in Glyphic users with workspace access will be able to view it.
+- Use **Share → Invite** to grant view access to specific people.
+
+## Keeping diagrams up to date
+
+Edits you make in Glyphic appear in the Notion embed immediately — there's no re-embed step. If a viewer has the Notion page open, they'll see updates on the next page refresh.

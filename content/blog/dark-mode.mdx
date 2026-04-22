@@ -1,0 +1,38 @@
+---
+title: Dark mode is here
+description: Glyphic now supports dark mode — it follows your system preference automatically, or you can set it manually.
+date: "2025-02-20"
+tag: update
+---
+
+## How it works
+
+Dark mode follows your system preference by default. If your OS is set to dark, Glyphic will be dark. Switch your OS to light and Glyphic switches too — no refresh needed.
+
+You can also pin it manually. Head to **Settings → Appearance** and choose Light, Dark, or System.
+
+## What's covered
+
+Dark mode applies across the full product:
+
+- The diagram editor and canvas
+- The sidebar, activity feed, and deal view
+- All modals, tooltips, and command palette
+- The docs site you're reading right now
+
+## Diagram colours
+
+Diagram node and edge colours are defined in your Mermaid source, so they carry over as-is into dark mode. If your diagrams use hardcoded light colours (like `fill:#fff`), they may look washed out on a dark canvas.
+
+The fix is to use semantic colour tokens instead:
+
+```
+flowchart LR
+  A[Start]:::primary --> B[End]:::secondary
+```
+
+Token values automatically adapt to the active theme. See the [theming guide](/docs/guides/core-concepts) for the full token reference.
+
+## Known issues
+
+Custom background colours set via `%%{init: ...}%%` frontmatter don't yet respond to the theme toggle — they use the value you set regardless of mode. We'll address this in a follow-up release.

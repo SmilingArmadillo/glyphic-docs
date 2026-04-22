@@ -1,0 +1,68 @@
+---
+title: Getting started with Mermaid diagrams in Glyphic
+description: New to Mermaid? This guide covers the basics — flowcharts, sequence diagrams, and entity relationships — so you can start diagramming in minutes.
+date: "2025-01-28"
+tag: tutorial
+---
+
+## What is Mermaid?
+
+Mermaid is a text-based diagramming language. Instead of dragging boxes around a canvas, you describe your diagram in plain text and Mermaid renders it. Glyphic is built on top of Mermaid and adds real-time collaboration, versioning, and a visual editor on top.
+
+## Your first flowchart
+
+Paste this into the Glyphic editor:
+
+```
+flowchart LR
+  A[User visits site] --> B{Logged in?}
+  B -- Yes --> C[Show dashboard]
+  B -- No --> D[Redirect to login]
+  D --> E[User logs in]
+  E --> C
+```
+
+You should see a left-to-right flowchart with a decision diamond. The direction options are `LR` (left-right), `TD` (top-down), `RL`, and `BT`.
+
+## Sequence diagrams
+
+Sequence diagrams are great for documenting API flows or user interactions:
+
+```
+sequenceDiagram
+  participant Browser
+  participant API
+  participant DB
+
+  Browser->>API: POST /login
+  API->>DB: SELECT user WHERE email = ?
+  DB-->>API: User record
+  API-->>Browser: 200 OK + session token
+```
+
+## Entity relationships
+
+Use `erDiagram` for data models:
+
+```
+erDiagram
+  USER {
+    string id PK
+    string email
+    string name
+  }
+  DEAL {
+    string id PK
+    string title
+    string owner_id FK
+  }
+  USER ||--o{ DEAL : owns
+```
+
+## Tips
+
+- Use `%%` for comments: `%% This is a comment`
+- Wrap node labels with spaces or special characters in quotes: `A["Hello, world!"]`
+- The Glyphic editor has autocomplete — press `Ctrl+Space` to see available node types for the current diagram
+
+Check out the full [Mermaid syntax reference](/docs/guides/core-concepts) for everything that's supported.
