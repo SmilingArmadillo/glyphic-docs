@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
+import { Sun, Moon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const NAV_LINKS = [
   { label: 'Product', href: 'https://glyphic.cc/#features' },
@@ -12,6 +15,31 @@ const NAV_LINKS = [
   { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: 'https://glyphic.cc/pricing' },
 ]
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  const isDark = mounted ? resolvedTheme === 'dark' : false
+
+  return (
+    <button
+      aria-label="Toggle theme"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="inline-flex items-center rounded-full border border-[#E5E3DA] dark:border-[#2A2A2A] p-1 overflow-hidden"
+    >
+      <Sun
+        fill="currentColor"
+        className={`size-4 p-0.5 rounded-full transition-colors ${!isDark ? 'bg-fd-accent text-fd-accent-foreground' : 'text-[#6B6B6B] dark:text-[#9CA3AF]'}`}
+      />
+      <Moon
+        fill="currentColor"
+        className={`size-4 p-0.5 rounded-full transition-colors ${isDark ? 'bg-fd-accent text-fd-accent-foreground' : 'text-[#6B6B6B] dark:text-[#9CA3AF]'}`}
+      />
+    </button>
+  )
+}
 
 export default function DocsNav() {
   const pathname = usePathname()
@@ -47,6 +75,7 @@ export default function DocsNav() {
       </div>
 
       <div className="flex items-center gap-3">
+        <ThemeToggle />
         <Link
           href="https://glyphic.cc/login"
           className="text-sm font-medium text-[#6B6B6B] dark:text-[#9CA3AF] hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-colors"
