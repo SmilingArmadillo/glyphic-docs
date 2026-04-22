@@ -1,11 +1,13 @@
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://glyphic.cc'
+
 const FOOTER_COLUMNS = [
   {
     title: 'Product',
     links: [
-      { label: 'Editor', href: '/app' },
-      { label: 'Examples', href: '/examples' },
-      { label: 'Pricing', href: '/pricing' },
-      { label: 'Changelog', href: '/changelog' },
+      { label: 'Editor', href: `${APP_URL}/app` },
+      { label: 'Examples', href: `${APP_URL}/examples` },
+      { label: 'Pricing', href: `${APP_URL}/pricing` },
+      { label: 'Changelog', href: `${APP_URL}/changelog` },
     ],
   },
   {
@@ -29,10 +31,10 @@ const FOOTER_COLUMNS = [
   {
     title: 'Company',
     links: [
-      { label: 'Blog', href: '/blog' },
-      { label: 'Use cases', href: '/use-cases' },
-      { label: 'Privacy', href: '/privacy' },
-      { label: 'Terms', href: '/terms' },
+      { label: 'Blog', href: `${APP_URL}/blog` },
+      { label: 'Use cases', href: `${APP_URL}/use-cases` },
+      { label: 'Privacy', href: `${APP_URL}/privacy` },
+      { label: 'Terms', href: `${APP_URL}/terms` },
     ],
   },
 ]
@@ -48,7 +50,7 @@ export default function DocsFooter() {
             </p>
             <ul className="space-y-2">
               {col.links.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <a
                     href={link.href}
                     className="text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:text-[#6366F1] dark:hover:text-[#818CF8] transition-colors"
