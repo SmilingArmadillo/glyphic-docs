@@ -9,5 +9,5 @@ export const source = loader({
 
 export const blog = loader({
   baseUrl: '/blog',
-  source: createMDXSource(blogCollection, []),
+  source: createMDXSource(blogCollection, []), // blog has no meta.json ordering
 })

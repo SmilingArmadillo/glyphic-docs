@@ -18,7 +18,7 @@ export const blog = defineCollections({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string(),
+    date: z.coerce.date(),
     tag: z.enum(['update', 'tutorial']),
   }),
 })
