@@ -37,3 +37,6 @@ next-env.d.ts
 
 # fumadocs-mdx generated output
 /.source/
+
+# superpowers plugin output
+.superpowers/
