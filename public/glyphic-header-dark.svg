@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 90" width="560" height="90">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap');
     @keyframes gh-tw-once{ 0%{opacity:.35} 50%{opacity:1} 100%{opacity:1} }
     .gh-line{fill:none; stroke:oklch(0.78 0.14 240); stroke-width:10; stroke-linecap:round; stroke-linejoin:round}
     .gh-dot{fill:oklch(0.78 0.14 240); opacity:1; animation: gh-tw-once 1.2s ease-out 1 both}
