@@ -3,6 +3,94 @@ title: "@compare"
 description: Show two diagram states side-by-side with before/after split view and optional diff highlighting.
 ---
 
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+
 # @compare
 
-Coming soon.
+The `@compare split` marker splits a single `.mmd` file into two diagram states shown side-by-side. Everything above the marker is the "before" diagram; everything below (up to `@compare`) is the "after" diagram.
+
+## Syntax
+
+```text
+{before diagram source}
+{optional meta-blocks for before}
+
+@compare split
+
+{after diagram source}
+{optional meta-blocks for after}
+
+@compare
+title before: "{label}"
+title after: "{label}"
+```
+
+## Example
+
+```text
+flowchart LR
+  A --> Server
+
+@animate
+A-->Server: type=line-flow, color=#ef4444, speed=1
+
+@present
+badge Server: "⚠ Overloaded" type=error
+
+@compare split
+
+flowchart LR
+  A --> LB --> S1
+  A --> LB --> S2
+
+@animate
+A-->LB: type=line-flow, color=#38bdf8, speed=2
+LB-->S1: type=line-flow, color=#22c55e, speed=2.5
+LB-->S2: type=line-flow, color=#22c55e, speed=2.5
+
+@present
+overlay top-right: "✓ Balanced" position=fixed color=#10b981
+
+@compare
+title before: "⚠ Congested"
+title after: "✓ Load Balanced"
+```
+
+## `@compare` block parameters
+
+<TypeTable
+  type={{
+    "title before": {
+      description: "Label shown above the left (before) panel",
+      type: "string",
+      default: "—",
+    },
+    "title after": {
+      description: "Label shown above the right (after) panel",
+      type: "string",
+      default: "—",
+    },
+    diff: {
+      description: "Enable automatic diff highlighting between the two states",
+      type: "true | false",
+      default: "false",
+    },
+  }}
+/>
+
+## Diff highlighting
+
+Add `diff: true` to the `@compare` block to automatically highlight structural changes:
+
+- **Before panel** — nodes and edges absent from the after diagram are highlighted red
+- **After panel** — nodes and edges new in the after diagram are highlighted green
+- Shared nodes and edges render without any highlight
+
+A legend (`● added  ● removed`) appears at the bottom of the split view when `diff: true` is set.
+
+```text
+@compare
+title before: "⚠ Congested"
+title after: "✓ Load Balanced"
+diff: true
+```
