@@ -3,24 +3,22 @@
 > Glyphic is a visual editor for Mermaid diagrams. Build, animate, compare, and share architecture diagrams without leaving your browser.
 
 ## Getting Started
+- [Editor Basics](/docs/getting-started/editor-basics)
 - [Getting Started](/docs/getting-started)
-- [Installation](/docs/getting-started/installation)
 - [Quickstart](/docs/getting-started/quickstart)
-- [Your First Project](/docs/getting-started/your-first-project)
 
 ## Guides
-- [Animations and Transitions](/docs/guides/animations-and-transitions)
-- [Core Concepts](/docs/guides/core-concepts)
-- [Deploying Your Work](/docs/guides/deploying-your-work)
+- [Exporting](/docs/guides/exporting)
 - [Guides](/docs/guides)
-- [Working with the Editor](/docs/guides/working-with-the-editor)
-
-## API Reference
-- [Authentication](/docs/api-reference/authentication)
-- [Editor API](/docs/api-reference/editor-api)
-- [API Reference](/docs/api-reference)
-- [Rendering API](/docs/api-reference/rendering-api)
-- [Webhooks](/docs/api-reference/webhooks)
+- [Sharing](/docs/guides/sharing)
 
 ## General
+- ["@config (planned)"](/docs/_planned/config)
+- ["@simulate (planned)"](/docs/_planned/simulate)
 - [Welcome to Glyphic](/docs)
+- ["@animate"](/docs/meta-blocks/animate)
+- ["@compare"](/docs/meta-blocks/compare)
+- [Meta-blocks](/docs/meta-blocks)
+- ["@present"](/docs/meta-blocks/present)
+- ["@status"](/docs/meta-blocks/status)
+- ["@style"](/docs/meta-blocks/style)
