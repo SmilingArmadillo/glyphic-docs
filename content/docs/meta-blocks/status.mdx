@@ -3,6 +3,95 @@ title: "@status"
 description: Turn your diagram into a live NOC board by mapping nodes to health states — healthy, degraded, or down.
 ---
 
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+
 # @status
 
-Coming soon.
+The `@status` block maps diagram nodes to health states, turning the diagram into a NOC board. Each node gets a colored border, a badge chip straddling its top edge, and a pulsing animation. A floating legend can show per-node detail labels.
+
+```text
+@status
+[legend: position={anchor}, padding={px}]
+{nodeId}: state={healthy|degraded|down} [, label="{text}"]
+```
+
+## States
+
+| state= | Border | Badge | Animation |
+|--------|--------|-------|-----------|
+| `healthy` | green `#22c55e` | green "HEALTHY" | slow breathe (border, 2.5s) |
+| `degraded` | amber `#f59e0b` | amber "DEGRADED" | faster pulse (border, 1.2s) |
+| `down` | red `#ef4444` | red "DOWN" | flash strobe (0.8s) |
+
+## Example
+
+```text
+flowchart LR
+  GW([API Gateway])
+  Auth([Auth Service])
+  Payment([Payment])
+  Orders([Orders])
+
+  GW --> Auth
+  GW --> Payment
+  GW --> Orders
+
+@status
+legend: position=below-center, padding=16
+GW: state=healthy, label="p99: 32ms · 99.9% uptime"
+Auth: state=degraded, label="p99: 840ms · elevated latency"
+Payment: state=down, label="last seen 3m ago · circuit open"
+Orders: state=healthy
+```
+
+## Parameters
+
+<TypeTable
+  type={{
+    state: {
+      description: "Health state for the node",
+      type: '"healthy" | "degraded" | "down"',
+      default: "—",
+    },
+    label: {
+      description: "Legend row text — omit to exclude node from legend",
+      type: "string",
+      default: "—",
+    },
+  }}
+/>
+
+## `legend:` line
+
+Optional. Renders a floating chip row showing nodes that have a `label=` value. Nodes without `label=` are omitted. The legend is not included in SVG/PNG exports.
+
+<TypeTable
+  type={{
+    position: {
+      description: "Legend panel anchor",
+      type: '"top-left" | "top-center" | "top-right" | "middle-left" | "middle-right" | "below-left" | "below-center" | "below-right"',
+      default: "below-center",
+    },
+    padding: {
+      description: "Offset from panel edge in px",
+      type: "number",
+      default: "12",
+    },
+  }}
+/>
+
+## Combining with `@animate` and `@style`
+
+Explicit `@animate` or `@style` entries for the same node override the status-derived defaults:
+
+```text
+@status
+GW: state=healthy
+
+@animate
+GW: type=node-pulse, pulseStyle=ripple, color=#22c55e, speed=1.5
+```
+
+The `@animate` entry for `GW` overrides the default `border` pulse from `@status`, using `ripple` instead.
+
+Both `@status` and `type=status-dot` can appear in the same diagram. `@status` controls border color, badge chip, and border animation; `status-dot` adds a separate animated indicator dot. See [@animate — status-dot](/docs/meta-blocks/animate) for details.
