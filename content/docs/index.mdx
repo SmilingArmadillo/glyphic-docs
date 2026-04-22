@@ -1,31 +1,36 @@
 ---
-title: Welcome to Glyphic
+title: Glyphic Documentation
 description: Glyphic is a visual editor for Mermaid diagrams. Build, animate, and share architecture diagrams without leaving your browser.
 ---
 
-# Welcome to Glyphic
+import { Card, Cards } from 'fumadocs-ui/components/card'
 
-Glyphic turns plain-text Mermaid diagrams into living, interactive visuals. Whether you're documenting a microservices architecture, walking through a deploy pipeline, or presenting a system design in a team meeting, Glyphic gives you the tools to make diagrams that move, compare, and tell stories.
+# Glyphic Documentation
 
-## What you can do with Glyphic
+Glyphic turns plain-text Mermaid diagrams into living, interactive visuals — with animation, status overlays, presentation labels, and before/after comparison built in.
 
-- **Edit** Mermaid source in a live editor with instant preview
-- **Animate** edges and nodes with the `@animate` meta-block
-- **Compare** before/after states with `@compare` split view
-- **Export** diagrams as SVG, PNG, GIF, or WebM
-- **Share** a view-only link so teammates see the diagram without touching the source
+## Start here
 
-## How this documentation is organized
+<Cards>
+  <Card title="Quickstart" href="/docs/getting-started/quickstart" description="Render your first animated diagram in under two minutes." />
+  <Card title="Editor Basics" href="/docs/getting-started/editor-basics" description="Learn the toolbar, keyboard shortcuts, and file upload." />
+</Cards>
 
-| Section | What you'll find |
-|---|---|
-| Getting Started | Install, first project, quickstart guide |
-| Guides | Core concepts, editor workflow, animations, deployment |
-| API Reference | Authentication, Editor API, Rendering API, Webhooks |
+## Meta-blocks
 
-## Quick links
+Glyphic extends Mermaid with meta-blocks — directives appended after the diagram definition.
 
-- [Installation](/docs/getting-started/installation)
-- [Quickstart](/docs/getting-started/quickstart)
-- [Core Concepts](/docs/guides/core-concepts)
-- [Editor API](/docs/api-reference/editor-api)
+<Cards>
+  <Card title="@animate" href="/docs/meta-blocks/animate" description="Animate edges with flowing particles and nodes with pulsing borders." />
+  <Card title="@status" href="/docs/meta-blocks/status" description="Live NOC board — map nodes to healthy, degraded, or down states." />
+  <Card title="@compare" href="/docs/meta-blocks/compare" description="Before/after split view with optional diff highlighting." />
+  <Card title="@present" href="/docs/meta-blocks/present" description="Add badges and fixed overlays to your diagram." />
+  <Card title="@style" href="/docs/meta-blocks/style" description="Set static node outline colors." />
+</Cards>
+
+## Guides
+
+<Cards>
+  <Card title="Sharing" href="/docs/guides/sharing" description="Editable links, View Only links, and embed snippets." />
+  <Card title="Exporting" href="/docs/guides/exporting" description="SVG, PNG, GIF, and WebM — formats and when to use each." />
+</Cards>
