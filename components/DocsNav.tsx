@@ -25,7 +25,10 @@ export default function DocsNav() {
         </Link>
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href || (link.href === '/docs' && pathname.startsWith('/docs'))
+            const isActive =
+              pathname === link.href ||
+              (link.href === '/docs' && pathname.startsWith('/docs')) ||
+              (link.href === '/blog' && pathname.startsWith('/blog'))
             return (
               <Link
                 key={link.href}

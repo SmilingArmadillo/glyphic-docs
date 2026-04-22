@@ -9,9 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.url === '/docs' ? 1.0 : 0.8,
   }))
 
+  const mostRecentPost = blog.getPages().sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0]
+
   const blogIndex = {
     url: 'https://glyphic.cc/blog',
-    lastModified: new Date(),
+    lastModified: mostRecentPost ? mostRecentPost.data.date : new Date('2026-04-22'),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }
