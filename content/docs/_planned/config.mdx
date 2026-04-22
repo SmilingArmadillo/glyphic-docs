@@ -3,6 +3,94 @@ title: "@config (planned)"
 description: Global diagram configuration — font, colors, animation defaults. Not yet implemented.
 ---
 
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+
 # @config
 
-Coming soon.
+<Callout type="warn">
+**Not yet implemented.** The syntax below is reserved — do not ship diagrams relying on it. This page exists to document planned behaviour before implementation.
+</Callout>
+
+The `@config` block sets global diagram defaults: font, primary colors, animation defaults, and Mermaid base theme. Per-edge and per-node `@animate` entries always override global defaults.
+
+## Font
+
+```text
+@config
+font: IBM Plex Sans
+```
+
+<TypeTable
+  type={{
+    font: {
+      description: "Diagram label font — any Google Fonts family name",
+      type: "string",
+      default: "IBM Plex Sans",
+    },
+  }}
+/>
+
+## Colors
+
+```text
+@config
+primaryColor: #3b82f6
+lineColor: #6b7280
+```
+
+<TypeTable
+  type={{
+    primaryColor: {
+      description: "Node fill / primary color",
+      type: "CSS color",
+      default: "theme default",
+    },
+    lineColor: {
+      description: "Edge stroke color",
+      type: "CSS color",
+      default: "theme default",
+    },
+  }}
+/>
+
+## Mermaid base theme
+
+```text
+@config
+theme: dark
+```
+
+<TypeTable
+  type={{
+    theme: {
+      description: "Mermaid base theme",
+      type: '"dark" | "default" | "forest" | "neutral" | "base"',
+      default: "dark",
+    },
+  }}
+/>
+
+## Global animation defaults
+
+Sets baseline defaults for all animated edges. Per-edge `@animate` entries override these for individual edges.
+
+```text
+@config
+animation.dot.color: #f59e0b
+animation.dot.speed: 1.2
+animation.lineFlow.color: #3b82f6
+animation.lineFlow.speed: 2
+animation.lineFlow.motionPreset: balanced
+animation.lineFlow.glowPreset: none
+```
+
+<TypeTable
+  type={{
+    "animation.dot.color": { description: "Default dot color", type: "CSS color", default: "#3b82f6" },
+    "animation.dot.speed": { description: "Default dot traversal duration in seconds", type: "number", default: "1.5" },
+    "animation.lineFlow.color": { description: "Default segment color", type: "CSS color", default: "#3b82f6" },
+    "animation.lineFlow.speed": { description: "Default cycle duration in seconds", type: "number", default: "1.5" },
+    "animation.lineFlow.motionPreset": { description: "Default motion character", type: '"flash" | "balanced" | "long-hold"', default: "balanced" },
+    "animation.lineFlow.glowPreset": { description: "Default glow", type: '"none" | "subtle" | "strong"', default: "none" },
+  }}
+/>
