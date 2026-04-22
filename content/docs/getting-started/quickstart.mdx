@@ -1,50 +1,71 @@
 ---
 title: Quickstart
-description: Render your first Mermaid diagram in Glyphic in under two minutes.
+description: Render your first Mermaid diagram — with animation — in under two minutes.
 ---
+
+import { Steps, Step } from 'fumadocs-ui/components/steps'
 
 # Quickstart
 
-## Step 1: Open the editor
+<Steps>
+  <Step>
 
-Navigate to [glyphic.cc/app](https://glyphic.cc/app). The editor opens with an example diagram pre-loaded.
+## Open the editor
 
-## Step 2: Write a diagram
+Go to [glyphic.cc/app](https://glyphic.cc/app). The editor opens with an example diagram pre-loaded in the left panel and a live preview on the right.
+
+  </Step>
+  <Step>
+
+## Write a diagram
 
 Clear the editor and paste:
 
-```mermaid
-flowchart TD
-  A[User] --> B[Load Balancer]
-  B --> C[API Server]
-  C --> D[(Database)]
+```text
+flowchart LR
+  User[User] --> LB[Load Balancer]
+  LB --> S1[Server 1]
+  LB --> S2[Server 2]
+  S1 --> DB[(Database)]
+  S2 --> DB
 ```
 
-The preview panel on the right updates instantly.
+The preview updates instantly.
 
-## Step 3: Add an animation
+  </Step>
+  <Step>
 
-Append this block below your diagram:
+## Add an animation
 
-```
+Append this block below your diagram (after the last line, no blank line required):
+
+```text
 @animate
-  A -> B: duration=1s delay=0
-  B -> C: duration=1s delay=0.5s
-  C -> D: duration=1s delay=1s
-@end
+User-->LB: type=line-flow, color=#38bdf8, speed=2
+LB-->S1: type=line-flow, color=#22c55e, speed=2.5
+LB-->S2: type=line-flow, color=#22c55e, speed=2.5
 ```
 
-Click the play button in the preview panel. Edges animate in sequence.
+The edges begin animating in the preview immediately.
 
-## Step 4: Export
+  </Step>
+  <Step>
 
-Click **Export** in the toolbar and choose **GIF** to download an animated export.
+## Export
 
-| Export format | Use case |
-|---|---|
-| SVG | Scalable, embeddable in docs |
+Click **Export** in the toolbar and choose a format:
+
+| Format | Best for |
+|--------|----------|
+| SVG | Docs, READMEs, embedding |
 | PNG | Slide decks, PR comments |
 | GIF | Animated, universal support |
 | WebM | High-quality video, Notion embeds |
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </Step>
+</Steps>
+
+## Next steps
+
+- [Editor Basics](/docs/getting-started/editor-basics) — toolbar, keyboard shortcuts, file upload
+- [@animate reference](/docs/meta-blocks/animate) — full parameter reference for edge and node animations
