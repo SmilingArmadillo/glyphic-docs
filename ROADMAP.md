@@ -6,9 +6,9 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 ## Open Issues
 
-| #  | Title              | Label | Status |
-|----|--------------------|-------|--------|
-| —  | No open issues yet | —     | —      |
+| #  | Title                              | Label     | Status |
+|----|------------------------------------|-----------|--------|
+| #6 | Dark mode not working on docs site | type: bug | Open   |
 
 ## Recently Closed
 
