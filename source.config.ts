@@ -1,4 +1,5 @@
-import { defineDocs, defineConfig } from 'fumadocs-mdx/config'
+import { defineDocs, defineCollections, defineConfig } from 'fumadocs-mdx/config'
+import { z } from 'zod'
 
 const { docs, meta } = defineDocs({
   docs: {
@@ -10,6 +11,17 @@ const { docs, meta } = defineDocs({
 })
 
 export { docs, meta }
+
+export const blog = defineCollections({
+  type: 'doc',
+  dir: 'content/blog',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.string(),
+    tag: z.enum(['update', 'tutorial']),
+  }),
+})
 
 export default defineConfig({
   mdxOptions: {
