@@ -3,10 +3,10 @@ import { source, blog } from '@/lib/source'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const docPages = source.getPages().map((page) => ({
-    url: `https://glyphic.cc${page.url}`,
+    url: `https://glyphic.cc/docs${page.url === '/' ? '' : page.url}`,
     lastModified: new Date('2026-04-22'),
     changeFrequency: 'weekly' as const,
-    priority: page.url === '/docs' ? 1.0 : 0.8,
+    priority: page.url === '/' ? 1.0 : 0.8,
   }))
 
   const mostRecentPost = blog.getPages().sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0]
