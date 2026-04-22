@@ -24,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Theme list must stay in sync with VALID_THEMES in lib/theme.tsx */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('glyphic-theme');if(t&&['warm','dark-tech','indigo'].includes(t))document.documentElement.dataset.theme=t;}catch(e){}})();`,
