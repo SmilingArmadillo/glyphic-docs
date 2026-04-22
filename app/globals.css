@@ -21,6 +21,15 @@
   --accent: 45 25% 94%;
   --accent-foreground: 0 0% 10%;
   --ring: 239 84% 67%;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(229, 227, 218, 0.8);
+  --glass-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  --code-keyword: #6b35dc;
+  --code-string: #c27d3a;
+  --code-comment: #8e8e8e;
+  --code-const: #15593b;
 }
 
 
@@ -153,26 +162,22 @@ h1, h2, h3 {
 }
 
 /* ── Shiki token overrides — driven by theme vars ── */
-[data-rehype-pretty-code-figure] .token.keyword,
-[data-rehype-pretty-code-figure] span[style*="--shiki-light:#6f42c1"],
-[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#f97583"] {
+[data-rehype-pretty-code-figure] span[style*="--shiki-light:#d73a49"],
+[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#f47067"] {
   color: var(--code-keyword) !important;
 }
 
-[data-rehype-pretty-code-figure] .token.string,
 [data-rehype-pretty-code-figure] span[style*="--shiki-light:#032f62"],
-[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#9ecbff"] {
+[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#96d0ff"] {
   color: var(--code-string) !important;
 }
 
-[data-rehype-pretty-code-figure] .token.comment,
 [data-rehype-pretty-code-figure] span[style*="--shiki-light:#6a737d"],
-[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#6a737d"] {
+[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#768390"] {
   color: var(--code-comment) !important;
 }
 
-[data-rehype-pretty-code-figure] .token.constant,
 [data-rehype-pretty-code-figure] span[style*="--shiki-light:#005cc5"],
-[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#79b8ff"] {
+[data-rehype-pretty-code-figure] span[style*="--shiki-dark:#6cb6ff"] {
   color: var(--code-const) !important;
 }
