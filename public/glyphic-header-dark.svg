@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 90" width="560" height="90">
+  <style>
+    @keyframes gh-tw-once{ 0%{opacity:.35} 50%{opacity:1} 100%{opacity:1} }
+    .gh-line{fill:none; stroke:oklch(0.78 0.14 240); stroke-width:10; stroke-linecap:round; stroke-linejoin:round}
+    .gh-dot{fill:oklch(0.78 0.14 240); opacity:1; animation: gh-tw-once 1.2s ease-out 1 both}
+  </style>
+  <!-- Glyph: source path 440..720 x (width 280), 340..600 y (height 260).
+       Target: fit in a 64x60 visual box, vertically centered in the 90-tall viewBox.
+       scale = 60/260 ≈ 0.2308. Glyph width becomes 280*0.2308 ≈ 64.6.
+       Place at x: 8..72.6 (leaving 8px left padding for stroke/dots).
+       tx = 8 - 440*0.2308 = -93.55.  Vertical: glyph top at y=15, center at y=45.
+       ty = 15 - 340*0.2308 = -63.46 -->
+  <g transform="translate(-93.55 -63.46) scale(0.2308)">
+    <path class="gh-line" d="M 440 340 L 640 340 L 720 420 L 720 520 L 640 600 L 540 600 L 540 520 L 620 520"/>
+    <circle class="gh-dot" cx="440" cy="340" r="22" style="animation-delay:0.00s"/>
+    <circle class="gh-dot" cx="640" cy="340" r="22" style="animation-delay:0.15s"/>
+    <circle class="gh-dot" cx="720" cy="420" r="22" style="animation-delay:0.30s"/>
+    <circle class="gh-dot" cx="720" cy="520" r="22" style="animation-delay:0.45s"/>
+    <circle class="gh-dot" cx="640" cy="600" r="22" style="animation-delay:0.60s"/>
+    <circle class="gh-dot" cx="540" cy="600" r="22" style="animation-delay:0.75s"/>
+    <circle class="gh-dot" cx="540" cy="520" r="22" style="animation-delay:0.90s"/>
+    <circle class="gh-dot" cx="620" cy="520" r="22" style="animation-delay:1.05s"/>
+  </g>
+  <!-- Wordmark: font-size 88 italic serif. Cap height ≈ 57. Glyph is 60 tall centered at y=45 (spans 15..75).
+       Baseline at y=70 puts caps starting around y=13, matching glyph top. -->
+  <text x="92" y="70" font-family="Instrument Serif, serif" font-style="italic" font-size="88">
+    <tspan fill="oklch(0.96 0.01 80)">glyphic</tspan><tspan fill="oklch(0.78 0.14 240)">.cc</tspan>
+  </text>
+</svg>

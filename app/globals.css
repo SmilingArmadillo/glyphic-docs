@@ -5,35 +5,42 @@
 @tailwind utilities;
 
 :root {
-  --color-fd-background: #FAF9F4;
-  --color-fd-foreground: #1A1A1A;
-  --color-fd-primary: #6366F1;
-  --color-fd-primary-foreground: #FFFFFF;
-  --color-fd-muted: #F0EFE9;
-  --color-fd-muted-foreground: #6B6B6B;
-  --color-fd-border: #E5E3DA;
-  --color-fd-card: #FFFFFF;
-  --color-fd-card-foreground: #1A1A1A;
-  --color-fd-popover: #FFFFFF;
-  --color-fd-popover-foreground: #1A1A1A;
-  --color-fd-sidebar: #F5F4EF;
-  --color-fd-sidebar-foreground: #1A1A1A;
+  --background: 50 33% 97%;
+  --foreground: 0 0% 10%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 45 25% 94%;
+  --muted-foreground: 0 0% 42%;
+  --border: 40 20% 88%;
+  --card: 45 25% 94%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --secondary: 45 25% 94%;
+  --secondary-foreground: 0 0% 10%;
+  --accent: 45 25% 94%;
+  --accent-foreground: 0 0% 10%;
+  --ring: 239 84% 67%;
 }
 
+
 .dark {
-  --color-fd-background: #0F0F0F;
-  --color-fd-foreground: #F5F5F0;
-  --color-fd-primary: #818CF8;
-  --color-fd-primary-foreground: #FFFFFF;
-  --color-fd-muted: #1A1A1A;
-  --color-fd-muted-foreground: #9CA3AF;
-  --color-fd-border: #2A2A2A;
-  --color-fd-card: #161616;
-  --color-fd-card-foreground: #F5F5F0;
-  --color-fd-popover: #1A1A1A;
-  --color-fd-popover-foreground: #F5F5F0;
-  --color-fd-sidebar: #111111;
-  --color-fd-sidebar-foreground: #F5F5F0;
+  --background: 0 0% 6%;
+  --foreground: 60 9% 96%;
+  --primary: 234 89% 74%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 0 0% 10%;
+  --muted-foreground: 0 0% 61%;
+  --border: 0 0% 17%;
+  --card: 0 0% 9%;
+  --card-foreground: 60 9% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 60 9% 96%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 60 9% 96%;
+  --accent: 0 0% 10%;
+  --accent-foreground: 60 9% 96%;
+  --ring: 234 89% 74%;
 }
 
 [data-fd-button] {
@@ -49,9 +56,9 @@
 }
 
 body {
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 h1, h2, h3 {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
