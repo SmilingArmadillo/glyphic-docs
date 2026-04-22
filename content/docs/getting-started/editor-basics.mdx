@@ -3,32 +3,84 @@ title: Editor Basics
 description: The editor layout, toolbar, keyboard shortcuts, file upload, and the Examples dropdown — everything you need to work efficiently in Glyphic.
 ---
 
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
+
 # Editor Basics
 
 ## Layout
 
-The editor is a two-column layout: source on the left, live preview on the right. The toolbar runs across the top.
+The editor is a two-column layout: source code on the left, live preview on the right. The toolbar runs across the top.
+
+```
+[Logo] [Examples ▼]          [Share] [Export ▼] [Light/Dark] [Grid] [Prettify]
+┌─────────────────────┬─────────────────────────────┐
+│                     │                             │
+│   Source editor     │     Live preview            │
+│   (code panel)      │     (diagram panel)         │
+│                     │                             │
+└─────────────────────┴─────────────────────────────┘
+```
+
+The preview updates as you type — no save or render button needed.
+
+## Toolbar
+
+<Accordions>
+  <Accordion title="Examples — load a pre-built diagram">
+
+Click **Examples** to open a dropdown of curated diagrams. Selecting one loads the full source (including any meta-blocks) into the editor.
+
+Use examples to learn meta-block syntax or to start from a working template.
+
+  </Accordion>
+  <Accordion title="Share — create a shareable link">
+
+Click **Share** to generate a link to your diagram.
+
+- **Editable** — anyone with the link can view and edit the diagram
+- **View Only** — the diagram renders but the source is never exposed to the viewer
+
+See [Sharing](/docs/guides/sharing) for full details and embed snippets.
+
+  </Accordion>
+  <Accordion title="Export — download your diagram">
+
+Click **Export** to download in your chosen format. Animated exports (GIF, WebM) capture the running animation from the preview.
+
+See [Exporting](/docs/guides/exporting) for format details.
+
+  </Accordion>
+  <Accordion title="Light/Dark — toggle editor theme">
+
+Switches between light and dark themes for both the editor panel and the preview background. The Mermaid theme updates to match.
+
+  </Accordion>
+  <Accordion title="Grid — toggle dot grid background">
+
+Shows or hides the dot grid on the preview background. The grid is not included in exports.
+
+  </Accordion>
+  <Accordion title="Prettify — render with R DiagrammeR">
+
+Renders the diagram using R DiagrammeR instead of the default Mermaid renderer. Produces a different visual style. Not all diagram types are supported.
+
+  </Accordion>
+</Accordions>
 
 ## Keyboard shortcuts
 
 | Shortcut | Action |
-|---|---|
-| `⌘S` / `Ctrl+S` | Save (no-op in browser, triggers export prompt in app) |
-| `⌘K` | Open search |
-| `⌘Z` | Undo |
-| `⌘⇧Z` | Redo |
-| `⌘+` | Zoom in |
-| `⌘-` | Zoom out |
-| `⌘0` | Reset zoom |
+|----------|--------|
+| `⌘Z` / `Ctrl+Z` | Undo |
+| `⌘⇧Z` / `Ctrl⇧Z` | Redo |
+| `⌘+` / `Ctrl+` | Zoom in |
+| `⌘-` / `Ctrl-` | Zoom out |
+| `⌘0` / `Ctrl0` | Reset zoom |
 
 ## File upload
 
-Drag a `.mmd` or `.txt` file onto the editor to load it. Click the upload area to browse.
+Drag a `.mmd` or `.txt` file onto the editor panel to load it. You can also click the upload area to browse for a file. The file contents replace the current source.
 
-## The toolbar
+## Zoom controls
 
-```
-[Logo] [Examples ▼] [Share] [Export ▼] [Light/Dark] [Grid] [Prettify]
-```
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+Use the floating zoom controls in the bottom-right of the preview panel to zoom and pan. Click the reset button to fit the diagram to the panel.
