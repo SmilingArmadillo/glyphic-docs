@@ -52,12 +52,21 @@ export default function DocsNav() {
     ? '/glyphic-header-dark.svg'
     : '/glyphic-header-light.svg'
 
+  console.debug('[DocsNav] mounted:', mounted, 'resolvedTheme:', resolvedTheme, 'logoSrc:', logoSrc)
+
   return (
     <header className="flex items-center justify-between px-6 h-14 bg-[#FAF9F4] dark:bg-[#0F0F0F] border-b border-[#E5E3DA] dark:border-[#2A2A2A]">
       <div className="flex items-center gap-6">
         <a href={app('/')} className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="Glyphic" width={186} height={30} />
+          <img
+            src={logoSrc}
+            alt="Glyphic"
+            width={186}
+            height={30}
+            onLoad={() => console.debug('[DocsNav] logo loaded:', logoSrc)}
+            onError={(e) => console.error('[DocsNav] logo FAILED to load:', logoSrc, e)}
+          />
         </a>
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map((link) => {
