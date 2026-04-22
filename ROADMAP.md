@@ -8,10 +8,10 @@ GitHub Project board: https://github.com/users/SmilingArmadillo/projects/4
 
 | # | Title | Label | Status |
 |---|-------|-------|--------|
-| #2 | Style 'On this page' TOC with snake/timeline design | type: feedback | Open |
+| — | No open issues yet | — | — |
 
 ## Recently Closed
 
 | # | Title | Closed |
 |---|-------|--------|
-| — | — | — |
+| #2 | Style 'On this page' TOC with snake/timeline design | 2026-04-22 |
