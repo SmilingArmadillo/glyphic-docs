@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import { usePathname } from 'next/navigation'
 import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
@@ -9,12 +10,12 @@ const isDev = process.env.NODE_ENV === 'development'
 const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
 
 const NAV_LINKS = [
-  { label: 'Product', href: app('/#features') },
-  { label: 'Docs', href: '/docs' },
-  { label: 'Examples', href: app('/examples') },
-  { label: 'Use cases', href: app('/use-cases') },
-  { label: 'Blog', href: app('/blog') },
-  { label: 'Pricing', href: app('/pricing') },
+  { label: 'Product', href: app('/#features'), prefix: null },
+  { label: 'Docs', href: '/docs', prefix: '/docs' },
+  { label: 'Examples', href: app('/examples'), prefix: null },
+  { label: 'Use cases', href: app('/use-cases'), prefix: null },
+  { label: 'Blog', href: app('/blog'), prefix: '/blog' },
+  { label: 'Pricing', href: app('/pricing'), prefix: null },
 ]
 
 function ThemeToggle() {
@@ -43,6 +44,8 @@ function ThemeToggle() {
 }
 
 export default function DocsNav() {
+  const pathname = usePathname()
+
   return (
     <header className="flex items-center justify-between px-6 h-14 bg-[#FAF9F4] dark:bg-[#0F0F0F] border-b border-[#E5E3DA] dark:border-[#2A2A2A]">
       <div className="flex items-center gap-6">
@@ -52,10 +55,10 @@ export default function DocsNav() {
         </a>
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map((link) => {
-            const isActive = link.href === '/docs'
+            const isActive = link.prefix ? pathname.startsWith(link.prefix) : false
             return (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 className={`px-3 py-1.5 text-sm font-medium transition-colors ${
                   isActive
