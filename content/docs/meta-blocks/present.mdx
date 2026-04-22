@@ -1,8 +1,93 @@
 ---
 title: "@present"
-description: Add presentation overlays to your diagram — badges attached to nodes and fixed text overlays positioned on the canvas.
+description: Add presentation overlays to your diagram — badges attached to nodes and fixed text labels positioned on the canvas.
 ---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 # @present
 
-Coming soon.
+The `@present` block adds visual labels to the diagram: badges attached to nodes and fixed overlays positioned on the canvas.
+
+```text
+@present
+badge {nodeId}: "{text}" [type={type}] [color={color}] [position={position}]
+overlay {anchor}: "{text}" [color={color}] position=fixed
+```
+
+<Tabs items={["badge", "overlay"]}>
+  <Tab value="badge">
+
+## `badge`
+
+A pill-shaped label rendered in the SVG, attached to a node and moving with it.
+
+```text
+@present
+badge Server: "⚠ Overloaded" type=error
+badge LB: "Load Balancer" type=info
+badge DB: "Healthy" type=success color=#10b981
+```
+
+<TypeTable
+  type={{
+    type: {
+      description: "Preset color scheme",
+      type: '"info" | "success" | "warning" | "error"',
+      default: "—",
+    },
+    color: {
+      description: "Override badge background color",
+      type: "CSS color",
+      default: "grey",
+    },
+    position: {
+      description: "Attached moves with diagram; fixed stays in viewport",
+      type: '"attached" | "fixed"',
+      default: "attached",
+    },
+  }}
+/>
+
+**Type color presets:**
+
+| Type | Background | Text |
+|------|-----------|------|
+| `info` | `#3b82f6` (blue) | white |
+| `success` | `#10b981` (green) | white |
+| `warning` | `#f59e0b` (amber) | black |
+| `error` | `#ef4444` (red) | white |
+
+  </Tab>
+  <Tab value="overlay">
+
+## `overlay`
+
+A text label positioned at a fixed viewport location. Useful for metric callouts, status text, or diagram annotations.
+
+```text
+@present
+overlay top-right: "Queue: 500+" position=fixed color=#ef4444
+overlay bottom-left: "p99: 2.3s" position=fixed color=#ef4444
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Text color",
+      type: "CSS color",
+      default: "—",
+    },
+    position: {
+      description: "Must be 'fixed' for overlays",
+      type: '"fixed"',
+      default: "fixed",
+    },
+  }}
+/>
+
+**Anchor values:** `top-left`, `top-right`, `bottom-left`, `bottom-right`, `top-center`, `bottom-center`
+
+  </Tab>
+</Tabs>
