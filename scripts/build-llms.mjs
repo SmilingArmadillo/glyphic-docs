@@ -45,7 +45,13 @@ const uncategorized = []
 
 for (const file of allFiles) {
   const rel = relative(CONTENT_DIR, file).replace(/\\/g, '/')
-  const content = readFileSync(file, 'utf-8')
+  let content
+  try {
+    content = readFileSync(file, 'utf-8')
+  } catch (err) {
+    console.error(`Error reading file ${file}: ${err.message}`)
+    process.exit(1)
+  }
   const { title } = extractFrontmatter(content)
   const url = filePathToUrl(file)
   const entry = `- [${title}](${url})`
@@ -72,7 +78,13 @@ console.log('✓ llms.txt written')
 
 let llmsFullTxt = `# Glyphic — Full Documentation\n\nGenerated: ${new Date().toISOString()}\n\n---\n\n`
 for (const file of allFiles) {
-  const content = readFileSync(file, 'utf-8')
+  let content
+  try {
+    content = readFileSync(file, 'utf-8')
+  } catch (err) {
+    console.error(`Error reading file ${file}: ${err.message}`)
+    process.exit(1)
+  }
   const url = filePathToUrl(file)
   llmsFullTxt += `## ${url}\n\n${content}\n\n---\n\n`
 }
