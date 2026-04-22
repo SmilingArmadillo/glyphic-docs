@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { RootProvider } from 'fumadocs-ui/provider'
+import { ThemeProvider } from '@/lib/theme'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -23,6 +24,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('glyphic-theme');if(t&&['warm','dark-tech','indigo'].includes(t))document.documentElement.dataset.theme=t;}catch(e){}})();`,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -32,7 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <RootProvider>{children}</RootProvider>
+        <ThemeProvider>
+          <RootProvider>{children}</RootProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
