@@ -31,7 +31,7 @@ const FOOTER_COLUMNS = [
   {
     title: 'Company',
     links: [
-      { label: 'Blog', href: 'https://glyphic.cc/blog' },
+      { label: 'Blog', href: '/blog' },
       { label: 'Use cases', href: 'https://glyphic.cc/use-cases' },
       { label: 'Privacy', href: 'https://glyphic.cc/privacy' },
       { label: 'Terms', href: 'https://glyphic.cc/terms' },

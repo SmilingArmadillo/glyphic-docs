@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: 'Docs', href: '/docs' },
   { label: 'Examples', href: 'https://glyphic.cc/examples' },
   { label: 'Use cases', href: 'https://glyphic.cc/use-cases' },
-  { label: 'Blog', href: 'https://glyphic.cc/blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: 'https://glyphic.cc/pricing' },
 ]
 
