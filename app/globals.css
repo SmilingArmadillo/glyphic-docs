@@ -55,6 +55,24 @@
   color: hsl(var(--muted-foreground) / 1);
 }
 
+.dark .prose {
+  --tw-prose-body: hsl(0 0% 85% / 1);
+  --tw-prose-headings: hsl(0 0% 95% / 1);
+  --tw-prose-lead: hsl(0 0% 85% / 1);
+  --tw-prose-links: hsl(234 89% 74% / 1);
+  --tw-prose-bold: hsl(0 0% 95% / 1);
+  --tw-prose-counters: hsl(0 0% 70% / 1);
+  --tw-prose-bullets: hsl(0 0% 50% / 1);
+  --tw-prose-hr: hsl(0 0% 20% / 1);
+  --tw-prose-quotes: hsl(0 0% 85% / 1);
+  --tw-prose-quote-borders: hsl(0 0% 30% / 1);
+  --tw-prose-captions: hsl(0 0% 70% / 1);
+  --tw-prose-kbd: hsl(0 0% 95% / 1);
+  --tw-prose-code: hsl(0 0% 95% / 1);
+  --tw-prose-th-borders: hsl(0 0% 25% / 1);
+  --tw-prose-td-borders: hsl(0 0% 20% / 1);
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
