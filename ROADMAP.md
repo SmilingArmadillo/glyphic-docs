@@ -8,7 +8,7 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title                              | Label     | Status |
 |----|------------------------------------|-----------|--------|
-| —  | No open issues                     | —         | —      |
+| #7 | feat: restructure docs and write full content (phases 1-4) | type: content | Open |
 
 ## Recently Closed
 
