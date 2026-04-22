@@ -1,27 +1,57 @@
+@import 'fumadocs-ui/style.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-fd-background: #FAF9F4;
+  --color-fd-foreground: #1A1A1A;
+  --color-fd-primary: #6366F1;
+  --color-fd-primary-foreground: #FFFFFF;
+  --color-fd-muted: #F0EFE9;
+  --color-fd-muted-foreground: #6B6B6B;
+  --color-fd-border: #E5E3DA;
+  --color-fd-card: #FFFFFF;
+  --color-fd-card-foreground: #1A1A1A;
+  --color-fd-popover: #FFFFFF;
+  --color-fd-popover-foreground: #1A1A1A;
+  --color-fd-sidebar: #F5F4EF;
+  --color-fd-sidebar-foreground: #1A1A1A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --color-fd-background: #0F0F0F;
+  --color-fd-foreground: #F5F5F0;
+  --color-fd-primary: #818CF8;
+  --color-fd-primary-foreground: #FFFFFF;
+  --color-fd-muted: #1A1A1A;
+  --color-fd-muted-foreground: #9CA3AF;
+  --color-fd-border: #2A2A2A;
+  --color-fd-card: #161616;
+  --color-fd-card-foreground: #F5F5F0;
+  --color-fd-popover: #1A1A1A;
+  --color-fd-popover-foreground: #F5F5F0;
+  --color-fd-sidebar: #111111;
+  --color-fd-sidebar-foreground: #F5F5F0;
+}
+
+[data-fd-button] {
+  border-radius: 9999px !important;
+}
+
+[data-fd-sidebar-item][data-type='folder'] > button,
+[data-fd-sidebar-folder] > button {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: var(--color-fd-muted-foreground);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1, h2, h3 {
+  font-family: var(--font-playfair), Georgia, serif;
 }
