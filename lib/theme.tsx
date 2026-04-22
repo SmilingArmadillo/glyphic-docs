@@ -16,21 +16,25 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(DEFAULT_THEME)
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof document === 'undefined') return DEFAULT_THEME
+    const attr = document.documentElement.dataset.theme as Theme | undefined
+    return attr && (VALID_THEMES as readonly string[]).includes(attr) ? attr : DEFAULT_THEME
+  })
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     if (stored && (VALID_THEMES as readonly string[]).includes(stored)) {
       setThemeState(stored)
       document.documentElement.dataset.theme = stored
+      document.documentElement.classList.toggle('dark', stored === 'dark-tech')
     }
   }, [])
 
   const setTheme = (t: Theme) => {
     setThemeState(t)
-    if (typeof document !== 'undefined') {
-      document.documentElement.dataset.theme = t
-    }
+    document.documentElement.dataset.theme = t
+    document.documentElement.classList.toggle('dark', t === 'dark-tech')
     localStorage.setItem(STORAGE_KEY, t)
   }
 

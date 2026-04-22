@@ -55,6 +55,11 @@
   --glass-bg: rgba(15, 15, 15, 0.7);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  --code-keyword: #bda4ff;
+  --code-string:  #ffcda1;
+  --code-comment: #7e7e7e;
+  --code-const:   #3ecf8e;
 }
 
 [data-fd-button] {

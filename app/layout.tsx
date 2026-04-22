@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Theme list must stay in sync with VALID_THEMES in lib/theme.tsx */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('glyphic-theme');if(t&&['warm','dark-tech','indigo'].includes(t))document.documentElement.dataset.theme=t;}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('glyphic-theme');if(t&&['warm','dark-tech','indigo'].includes(t)){document.documentElement.dataset.theme=t;document.documentElement.classList.toggle('dark',t==='dark-tech');}}catch(e){}})();`,
           }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
