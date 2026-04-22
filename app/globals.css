@@ -22,6 +22,7 @@
   --accent-foreground: 0 0% 10%;
   --ring: 239 84% 67%;
 
+  /* fallback: mirrors [data-theme="warm"] — update both if warm theme changes */
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(229, 227, 218, 0.8);
   --glass-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
