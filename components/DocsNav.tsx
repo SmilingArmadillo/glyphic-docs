@@ -44,15 +44,20 @@ function ThemeToggle() {
 
 export default function DocsNav() {
   const pathname = usePathname()
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  const logoSrc = mounted && resolvedTheme === 'dark'
+    ? '/glyphic-header-dark.svg'
+    : '/glyphic-header-light.svg'
 
   return (
     <header className="flex items-center justify-between px-6 h-14 bg-[#FAF9F4] dark:bg-[#0F0F0F] border-b border-[#E5E3DA] dark:border-[#2A2A2A]">
       <div className="flex items-center gap-6">
         <a href={app('/')} className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/glyphic-header-light.svg" alt="Glyphic" width={186} height={30} className="dark:hidden" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/glyphic-header-dark.svg" alt="Glyphic" width={186} height={30} className="hidden dark:block" />
+          <img src={logoSrc} alt="Glyphic" width={186} height={30} />
         </a>
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map((link) => {
