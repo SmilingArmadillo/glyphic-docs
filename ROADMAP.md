@@ -6,8 +6,9 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 ## Open Issues
 
-| #  | Title                              | Label     | Status |
-|----|------------------------------------|-----------|--------|
+| #  | Title                                 | Label     | Status |
+|----|---------------------------------------|-----------|--------|
+| #8 | fix: dark mode text legibility issues | type: bug | Open   |
 
 ## Recently Closed
 
