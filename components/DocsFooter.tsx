@@ -1,13 +1,11 @@
-import Link from 'next/link'
-
 const FOOTER_COLUMNS = [
   {
     title: 'Product',
     links: [
-      { label: 'Editor', href: 'https://glyphic.cc/app' },
-      { label: 'Examples', href: 'https://glyphic.cc/examples' },
-      { label: 'Pricing', href: 'https://glyphic.cc/pricing' },
-      { label: 'Changelog', href: 'https://glyphic.cc/changelog' },
+      { label: 'Editor', href: '/app' },
+      { label: 'Examples', href: '/examples' },
+      { label: 'Pricing', href: '/pricing' },
+      { label: 'Changelog', href: '/changelog' },
     ],
   },
   {
@@ -32,9 +30,9 @@ const FOOTER_COLUMNS = [
     title: 'Company',
     links: [
       { label: 'Blog', href: '/blog' },
-      { label: 'Use cases', href: 'https://glyphic.cc/use-cases' },
-      { label: 'Privacy', href: 'https://glyphic.cc/privacy' },
-      { label: 'Terms', href: 'https://glyphic.cc/terms' },
+      { label: 'Use cases', href: '/use-cases' },
+      { label: 'Privacy', href: '/privacy' },
+      { label: 'Terms', href: '/terms' },
     ],
   },
 ]
@@ -51,12 +49,12 @@ export default function DocsFooter() {
             <ul className="space-y-2">
               {col.links.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     href={link.href}
                     className="text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:text-[#6366F1] dark:hover:text-[#818CF8] transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
