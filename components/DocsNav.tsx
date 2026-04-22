@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
 import { Sun, Moon } from 'lucide-react'
@@ -50,8 +49,10 @@ export default function DocsNav() {
     <header className="flex items-center justify-between px-6 h-14 bg-[#FAF9F4] dark:bg-[#0F0F0F] border-b border-[#E5E3DA] dark:border-[#2A2A2A]">
       <div className="flex items-center gap-6">
         <a href={app('/')} className="flex items-center">
-          <Image src="/glyphic-header-light.svg" alt="Glyphic" width={186} height={30} className="dark:hidden" />
-          <Image src="/glyphic-header-dark.svg" alt="Glyphic" width={186} height={30} className="hidden dark:block" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/glyphic-header-light.svg" alt="Glyphic" width={186} height={30} className="dark:hidden" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/glyphic-header-dark.svg" alt="Glyphic" width={186} height={30} className="hidden dark:block" />
         </a>
         <nav className="flex items-center gap-1">
           {NAV_LINKS.map((link) => {
