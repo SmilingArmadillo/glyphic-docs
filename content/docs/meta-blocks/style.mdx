@@ -1,8 +1,57 @@
 ---
 title: "@style"
-description: Set static visual styles on nodes — outline color and more.
+description: Set static visual styles on diagram nodes — outline (border) color.
 ---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
 # @style
 
-Coming soon.
+The `@style` block sets static visual styles on nodes. Each line targets a node by ID.
+
+```text
+@style
+{nodeId}: outline={color}
+```
+
+## `outline`
+
+Sets the stroke (border) color of the node's shape.
+
+```text
+@style
+Users: outline=#4fc3f7
+API: outline=#f59e0b
+DB: outline=#ef4444
+```
+
+<TypeTable
+  type={{
+    outline: {
+      description: "Stroke color of the node shape. Accepts any CSS color value: named colors, hex, rgb, etc.",
+      type: "CSS color",
+      default: "—",
+    },
+  }}
+/>
+
+All node shapes are supported: rectangles (`[text]`), stadiums (`([text])`), cylinders (`[(text)]`), diamonds (`{text}`), and others.
+
+<Callout type="info">
+`@style` works without `@animate`. You can set an outline color on a node without adding any animation.
+</Callout>
+
+## Combining with `@animate`
+
+```text
+flowchart LR
+  Users([Users])
+  API[API Gateway]
+  Users --> API
+
+@style
+Users: outline=#4fc3f7
+
+@animate
+Users-->API: type=line-flow, color=#4fc3f7, speed=2
+```
