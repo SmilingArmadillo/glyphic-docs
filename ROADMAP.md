@@ -6,9 +6,9 @@ GitHub Project board: https://github.com/users/SmilingArmadillo/projects/4
 
 ## Open Issues
 
-| # | Title | Label | Status |
-|---|-------|-------|--------|
-| — | No open issues yet | — | — |
+| #  | Title                                          | Label          | Status |
+|----|------------------------------------------------|----------------|--------|
+| #3 | Match marketing site header styles in docs nav | type: feedback | Open   |
 
 ## Recently Closed
 
