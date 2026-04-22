@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { blog } from '@/lib/source'
-import defaultMdxComponents from 'fumadocs-ui/mdx'
+import { mdxComponents } from '@/components/mdx-components'
 import DocsNav from '@/components/DocsNav'
 import DocsFooter from '@/components/DocsFooter'
 
@@ -76,7 +76,7 @@ export default function BlogPostPage({ params }: Props) {
           {page.data.title}
         </h1>
         <div className="prose prose-neutral max-w-none text-[15px] leading-relaxed">
-          <MDX components={defaultMdxComponents} />
+          <MDX components={mdxComponents} />
         </div>
       </main>
       <DocsFooter />
