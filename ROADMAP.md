@@ -8,7 +8,7 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title              | Label | Status |
 |----|--------------------|-------|--------|
-| —  | No open issues yet | —     | —      |
+| #5 | Adopt Supabase-inspired styling: Tailwind tokens, glass panels, animated transitions | type: feedback, priority: low | Open |
 
 ## Recently Closed
 
