@@ -1,0 +1,735 @@
+# Glyphic — Full Documentation
+
+Generated: 2026-04-22T05:00:36.595Z
+
+---
+
+## /docs/api-reference/authentication
+
+---
+title: Authentication
+description: How to authenticate with the Glyphic API using bearer tokens.
+---
+
+# Authentication
+
+## Getting an API key
+
+API keys are available on the [Dashboard](https://glyphic.cc/dashboard) under **Settings → API Keys**.
+
+## Using your key
+
+Include the key as a bearer token in every request:
+
+```bash
+curl https://glyphic.cc/api/shares \
+  -H "Authorization: Bearer glyph_live_abc123" \
+  -H "Content-Type: application/json" \
+  -d '{"source": "flowchart TD\n  A --> B", "background": "dark", "type": "editable"}'
+```
+
+## Key types
+
+| Type | Prefix | Permissions |
+|---|---|---|
+| Live | `glyph_live_` | Full API access |
+| Read-only | `glyph_ro_` | GET endpoints only |
+| Test | `glyph_test_` | Sandboxed, no persistence |
+
+## Error codes
+
+| Code | Meaning |
+|---|---|
+| `401` | Missing or invalid token |
+| `403` | Token lacks required permission |
+| `429` | Rate limit exceeded |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+
+---
+
+## /docs/api-reference/editor-api
+
+---
+title: Editor API
+description: API endpoints for creating, retrieving, and managing editor shares.
+---
+
+# Editor API
+
+## Create a share
+
+```
+POST /api/shares
+```
+
+**Request body:**
+
+```json
+{
+  "source": "flowchart TD\n  A --> B",
+  "background": "dark",
+  "type": "editable"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "url": "https://glyphic.cc/edit/550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+## Retrieve a share
+
+```
+GET /api/shares/:id
+```
+
+**Response:**
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "type": "editable",
+  "source": "flowchart TD\n  A --> B",
+  "background": "dark",
+  "createdAt": "2026-04-22T12:00:00Z"
+}
+```
+
+## Share types
+
+| Type | Source in response | Editor enabled |
+|---|---|---|
+| `editable` | Yes | Yes |
+| `view-only` | No | No |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+---
+
+## /docs/api-reference
+
+---
+title: API Reference
+description: Complete reference for the Glyphic HTTP API — authentication, editor operations, rendering, and webhooks.
+---
+
+# API Reference
+
+The Glyphic API is a REST API served at `https://glyphic.cc/api`.
+
+## Base URL
+
+```
+https://glyphic.cc/api
+```
+
+## Authentication
+
+All API requests require a bearer token in the `Authorization` header:
+
+```
+Authorization: Bearer <your-api-key>
+```
+
+## Endpoints
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/shares` | Create a share (editable or view-only) |
+| `GET` | `/shares/:id` | Retrieve an editable share payload |
+| `GET` | `/shares/:id/render` | Retrieve a view-only rendered SVG |
+| `POST` | `/prettify/:renderer` | Prettify via named renderer |
+| `POST` | `/render` | Render Mermaid source server-side |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+---
+
+## /docs/api-reference/rendering-api
+
+---
+title: Rendering API
+description: Server-side Mermaid rendering and view-only SVG retrieval endpoints.
+---
+
+# Rendering API
+
+## Render Mermaid source
+
+```
+POST /api/render
+```
+
+Renders Mermaid source server-side and returns an SVG string. Useful for CI pipelines, documentation generators, and preview thumbnails.
+
+**Request:**
+
+```json
+{
+  "source": "flowchart TD\n  A --> B",
+  "background": "dark",
+  "theme": "default"
+}
+```
+
+**Response:**
+
+```json
+{
+  "svg": "<svg xmlns='http://www.w3.org/2000/svg'>...</svg>",
+  "width": 400,
+  "height": 300
+}
+```
+
+## Retrieve view-only SVG
+
+```
+GET /api/shares/:id/render
+```
+
+Returns the rendered SVG for a view-only share. The Mermaid source is never included in the response.
+
+| Field | Type | Description |
+|---|---|---|
+| `svg` | string | Rendered SVG markup |
+| `background` | `dark` or `white` | Background the diagram was saved with |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.
+
+
+---
+
+## /docs/api-reference/webhooks
+
+---
+title: Webhooks
+description: Receive real-time notifications when shares are created or diagrams are rendered via the Glyphic API.
+---
+
+# Webhooks
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Configure webhooks on your [Dashboard](https://glyphic.cc/dashboard) under **Settings → Webhooks**.
+
+## Supported events
+
+| Event | Trigger |
+|---|---|
+| `share.created` | A new share is created via the API or editor |
+| `share.viewed` | A view-only share is opened |
+| `render.completed` | A server-side render finishes |
+
+## Payload format
+
+All webhook payloads use this envelope:
+
+```json
+{
+  "event": "share.created",
+  "timestamp": "2026-04-22T12:00:00Z",
+  "data": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "type": "editable",
+    "background": "dark"
+  }
+}
+```
+
+## Verifying signatures
+
+Glyphic signs every webhook with `HMAC-SHA256`. The signature is in the `X-Glyphic-Signature` header:
+
+```bash
+echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET"
+```
+
+Compare this to the header value. Reject requests where they don't match.
+
+| Header | Value |
+|---|---|
+| `X-Glyphic-Signature` | `sha256=<hex-digest>` |
+| `X-Glyphic-Event` | Event name, e.g. `share.created` |
+| `Content-Type` | `application/json` |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.
+
+
+---
+
+## /docs/getting-started
+
+---
+title: Getting Started
+description: Everything you need to start using Glyphic — from installation to your first animated diagram.
+---
+
+# Getting Started
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Glyphic runs entirely in the browser for the core editor experience, with an optional backend for sharing and server-side rendering.
+
+## Prerequisites
+
+| Requirement | Version |
+|---|---|
+| Modern browser | Chrome 110+, Firefox 115+, Safari 16+ |
+| Node.js (for self-hosting) | 18.x or later |
+| pnpm (for self-hosting) | 8.x or later |
+
+## What's in this section
+
+- **Installation** — add Glyphic to your workflow or self-host it
+- **Quickstart** — render your first diagram in under two minutes
+- **Your First Project** — a complete walkthrough from blank canvas to shared link
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+
+---
+
+## /docs/getting-started/installation
+
+---
+title: Installation
+description: How to start using Glyphic — hosted at glyphic.cc or self-hosted on your own infrastructure.
+---
+
+# Installation
+
+## Use the hosted version
+
+No installation required. Open [glyphic.cc/app](https://glyphic.cc/app) in your browser and start editing immediately.
+
+## Self-host with Docker
+
+```bash
+docker pull ghcr.io/smilingarmadillo/glyphic:latest
+docker run -p 3000:3000 ghcr.io/smilingarmadillo/glyphic:latest
+```
+
+Visit `http://localhost:3000` to open the editor.
+
+## Self-host from source
+
+```bash
+git clone https://github.com/SmilingArmadillo/mermaid-studio.git
+cd mermaid-studio
+pnpm install
+pnpm dev
+```
+
+## Environment variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `REDIS_URL` | Yes (sharing) | Redis connection string for share storage |
+| `API_PORT` | No | Port for the Node.js API server (default: 3001) |
+| `VITE_API_BASE` | No | Base URL the frontend uses to reach the API |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+
+---
+
+## /docs/getting-started/quickstart
+
+---
+title: Quickstart
+description: Render your first Mermaid diagram in Glyphic in under two minutes.
+---
+
+# Quickstart
+
+## Step 1: Open the editor
+
+Navigate to [glyphic.cc/app](https://glyphic.cc/app). The editor opens with an example diagram pre-loaded.
+
+## Step 2: Write a diagram
+
+Clear the editor and paste:
+
+```mermaid
+flowchart TD
+  A[User] --> B[Load Balancer]
+  B --> C[API Server]
+  C --> D[(Database)]
+```
+
+The preview panel on the right updates instantly.
+
+## Step 3: Add an animation
+
+Append this block below your diagram:
+
+```
+@animate
+  A -> B: duration=1s delay=0
+  B -> C: duration=1s delay=0.5s
+  C -> D: duration=1s delay=1s
+@end
+```
+
+Click the play button in the preview panel. Edges animate in sequence.
+
+## Step 4: Export
+
+Click **Export** in the toolbar and choose **GIF** to download an animated export.
+
+| Export format | Use case |
+|---|---|
+| SVG | Scalable, embeddable in docs |
+| PNG | Slide decks, PR comments |
+| GIF | Animated, universal support |
+| WebM | High-quality video, Notion embeds |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+---
+
+## /docs/getting-started/your-first-project
+
+---
+title: Your First Project
+description: A complete walkthrough from a blank Glyphic editor to a shared, animated diagram.
+---
+
+# Your First Project
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. In this guide we'll build a realistic system architecture diagram, animate it, and share a view-only link.
+
+## What we're building
+
+A three-tier web application diagram with animated request flow.
+
+## 1. Define the architecture
+
+```mermaid
+flowchart LR
+  Client --> CDN
+  CDN --> API
+  API --> Cache[(Redis)]
+  API --> DB[(Postgres)]
+  API --> Queue[Job Queue]
+  Queue --> Worker
+```
+
+## 2. Style the nodes
+
+```
+@style
+  Client: fill=#6366F1 color=#fff
+  CDN: fill=#E0E7FF
+  DB: fill=#FEF3C7
+@end
+```
+
+## 3. Animate the request flow
+
+```
+@animate
+  Client -> CDN: duration=0.8s
+  CDN -> API: duration=0.8s delay=0.7s
+  API -> Cache: duration=0.6s delay=1.4s
+@end
+```
+
+## 4. Share it
+
+Click **Share → View Only**. Copy the link and send it to your team. They see the animated diagram — not the source.
+
+| Step | Result |
+|---|---|
+| Share → View Only | Generates a `/view/:id` URL |
+| Share → Editable | Generates an `/edit/:id` URL |
+| Export → GIF | Downloads `diagram.gif` |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.
+
+
+---
+
+## /docs/guides/animations-and-transitions
+
+---
+title: Animations and Transitions
+description: The complete reference for @animate, @present, and @compare — Glyphic's meta-block animation system.
+---
+
+# Animations and Transitions
+
+## @animate
+
+Animate edges sequentially or simultaneously.
+
+```
+@animate
+  A -> B: duration=1s delay=0
+  B -> C: duration=1s delay=1s type=pill
+@end
+```
+
+### Animation parameters
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `duration` | `Ns` or `Nms` | `1s` | How long the particle travels the edge |
+| `delay` | `Ns` or `Nms` | `0` | When the animation starts |
+| `type` | `dot` or `pill` or `dash` | `dot` | Particle shape |
+| `color` | hex | accent color | Particle color |
+
+## @present
+
+Overlay callouts and highlights for presentation mode.
+
+```
+@present
+  step 1: highlight A "Entry point"
+  step 2: highlight B "Processing layer"
+  step 3: callout C "This is the bottleneck"
+@end
+```
+
+## @compare
+
+Show a before/after split view.
+
+```
+@compare
+before:
+  flowchart TD
+    A --> B
+after:
+  flowchart TD
+    A --> B
+    A --> C
+@end
+```
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+
+---
+
+## /docs/guides/core-concepts
+
+---
+title: Core Concepts
+description: How Glyphic's render pipeline, meta-blocks, and plugin system fit together.
+---
+
+# Core Concepts
+
+## The render pipeline
+
+Glyphic processes your diagram source in three stages:
+
+```
+Source text
+  → Meta-block parser   (@animate, @style, @compare, etc.)
+  → Mermaid renderer    (produces SVG)
+  → Injector pipeline   (applies animations, styles, overlays)
+  → Preview panel       (displays result)
+```
+
+## Meta-blocks
+
+Meta-blocks are Glyphic-specific extensions appended after valid Mermaid source. They use an `@directive ... @end` syntax:
+
+```
+@animate
+  A -> B: duration=1s
+@end
+```
+
+Mermaid ignores them. Glyphic's parser strips them before passing source to Mermaid, then applies the instructions to the rendered SVG.
+
+## Supported directives
+
+| Directive | Purpose |
+|---|---|
+| `@animate` | Edge and node animations |
+| `@style` | Node fill, stroke, text color |
+| `@status` | Live status overlay |
+| `@compare` | Before/after split view |
+| `@present` | Presentation overlays |
+| `@simulate` | Traffic simulation |
+
+## Plugin system
+
+Renderers are swappable via the `RendererPlugin` interface. The default renderer is Mermaid. A Prettify renderer (R DiagrammeR) can be activated from the toolbar.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.
+
+
+---
+
+## /docs/guides/deploying-your-work
+
+---
+title: Deploying Your Work
+description: How to self-host Glyphic on your own infrastructure — Docker, environment variables, and reverse proxy setup.
+---
+
+# Deploying Your Work
+
+## Docker (recommended)
+
+```bash
+docker compose up -d
+```
+
+Use this `docker-compose.yml`:
+
+```yaml
+version: '3.9'
+services:
+  frontend:
+    image: ghcr.io/smilingarmadillo/glyphic-frontend:latest
+    ports: ['3000:3000']
+    environment:
+      VITE_API_BASE: http://api:3001
+  api:
+    image: ghcr.io/smilingarmadillo/glyphic-api:latest
+    ports: ['3001:3001']
+    environment:
+      REDIS_URL: redis://redis:6379
+  redis:
+    image: redis:7-alpine
+    volumes: [redis-data:/data]
+volumes:
+  redis-data:
+```
+
+## Reverse proxy
+
+Route `/docs` to the docs Next.js app and everything else to the Vite frontend.
+
+| Path | Target |
+|---|---|
+| `/docs/*` | `glyphic-docs:3002` |
+| `/api/*` | `glyphic-api:3001` |
+| `/*` | `glyphic-frontend:3000` |
+
+## Environment variables
+
+| Variable | Service | Description |
+|---|---|---|
+| `REDIS_URL` | API | Redis connection for share storage |
+| `VITE_API_BASE` | Frontend | API base URL |
+| `PORT` | Docs | Port for the Next.js docs server |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+---
+
+## /docs/guides
+
+---
+title: Guides
+description: In-depth guides covering Glyphic's core concepts, editor workflow, animations, and deployment.
+---
+
+# Guides
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. These guides assume you've completed the Getting Started section and rendered at least one diagram.
+
+## In this section
+
+| Guide | What you'll learn |
+|---|---|
+| Core Concepts | How Glyphic's render pipeline works |
+| Working with the Editor | Keyboard shortcuts, panels, file upload |
+| Animations and Transitions | The full `@animate` and `@present` API |
+| Deploying Your Work | Self-hosting, Docker, environment config |
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+
+
+---
+
+## /docs/guides/working-with-the-editor
+
+---
+title: Working with the Editor
+description: Editor panels, keyboard shortcuts, file upload, and the toolbar — everything you need to work efficiently in Glyphic.
+---
+
+# Working with the Editor
+
+## Layout
+
+The editor is a two-column layout: source on the left, live preview on the right. The toolbar runs across the top.
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `⌘S` / `Ctrl+S` | Save (no-op in browser, triggers export prompt in app) |
+| `⌘K` | Open search |
+| `⌘Z` | Undo |
+| `⌘⇧Z` | Redo |
+| `⌘+` | Zoom in |
+| `⌘-` | Zoom out |
+| `⌘0` | Reset zoom |
+
+## File upload
+
+Drag a `.mmd` or `.txt` file onto the editor to load it. Click the upload area to browse.
+
+## The toolbar
+
+```
+[Logo] [Examples ▼] [Share] [Export ▼] [Light/Dark] [Grid] [Prettify]
+```
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+
+
+---
+
+## /docs
+
+---
+title: Welcome to Glyphic
+description: Glyphic is a visual editor for Mermaid diagrams. Build, animate, and share architecture diagrams without leaving your browser.
+---
+
+# Welcome to Glyphic
+
+Glyphic turns plain-text Mermaid diagrams into living, interactive visuals. Whether you're documenting a microservices architecture, walking through a deploy pipeline, or presenting a system design in a team meeting, Glyphic gives you the tools to make diagrams that move, compare, and tell stories.
+
+## What you can do with Glyphic
+
+- **Edit** Mermaid source in a live editor with instant preview
+- **Animate** edges and nodes with the `@animate` meta-block
+- **Compare** before/after states with `@compare` split view
+- **Export** diagrams as SVG, PNG, GIF, or WebM
+- **Share** a view-only link so teammates see the diagram without touching the source
+
+## How this documentation is organized
+
+| Section | What you'll find |
+|---|---|
+| Getting Started | Install, first project, quickstart guide |
+| Guides | Core concepts, editor workflow, animations, deployment |
+| API Reference | Authentication, Editor API, Rendering API, Webhooks |
+
+## Quick links
+
+- [Installation](/docs/getting-started/installation)
+- [Quickstart](/docs/getting-started/quickstart)
+- [Core Concepts](/docs/guides/core-concepts)
+- [Editor API](/docs/api-reference/editor-api)
+
+
+---
+
