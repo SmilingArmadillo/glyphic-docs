@@ -2,16 +2,17 @@
 
 Last updated: 2026-04-22
 
-GitHub Project board: https://github.com/users/SmilingArmadillo/projects/4
+GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/projects/4)
 
 ## Open Issues
 
-| #  | Title                                          | Label          | Status |
-|----|------------------------------------------------|----------------|--------|
-| #3 | Match marketing site header styles in docs nav | type: feedback | Open   |
+| #  | Title              | Label | Status |
+|----|--------------------|-------|--------|
+| —  | No open issues yet | —     | —      |
 
 ## Recently Closed
 
-| # | Title | Closed |
-|---|-------|--------|
+| #  | Title                                               | Closed     |
+|----|-----------------------------------------------------|------------|
+| #3 | Match marketing site header styles in docs nav      | 2026-04-22 |
 | #2 | Style 'On this page' TOC with snake/timeline design | 2026-04-22 |
