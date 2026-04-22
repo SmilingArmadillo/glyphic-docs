@@ -11,7 +11,10 @@ interface Props {
 }
 
 export function generateStaticParams() {
-  return blog.getPages().map((page) => ({ slug: page.slugs[0] }))
+  return blog
+    .getPages()
+    .filter((page) => page.slugs.length === 1)
+    .map((page) => ({ slug: page.slugs[0] }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -63,7 +66,7 @@ export default function BlogPostPage({ params }: Props) {
           href="/blog"
           className="text-[12px] text-[#6B6B6B] hover:text-[#6366F1] transition-colors mb-8 inline-block"
         >
-          ← Back to blog
+          <span aria-hidden="true">← </span>Back to blog
         </Link>
         <div className="flex items-center gap-3 mb-3">
           <TagPill tag={page.data.tag} />
