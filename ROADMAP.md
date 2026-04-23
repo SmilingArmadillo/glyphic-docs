@@ -1,13 +1,15 @@
 # Roadmap
 
-Last updated: 2026-04-22
+Last updated: 2026-04-23
 
 GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/projects/4)
 
 ## Open Issues
 
-| #  | Title | Label | Status |
-|----|-------|-------|--------|
+| #   | Title                                                      | Label     | Status |
+|-----|------------------------------------------------------------|-----------| -------|
+| #10 | fix: ThemeToggle aria-hidden hydration mismatch in DocsNav | type: bug | Open   |
+| #9  | fix: docs page typography and spacing                      | type: bug | Open   |
 
 ## Recently Closed
 

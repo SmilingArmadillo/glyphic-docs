@@ -22,20 +22,23 @@ function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  const isDark = mounted ? resolvedTheme === 'dark' : false
+  const isDark = mounted && resolvedTheme === 'dark'
 
   return (
     <button
       aria-label="Toggle theme"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="inline-flex items-center rounded-full border border-[#E5E3DA] dark:border-[#2A2A2A] p-1 overflow-hidden"
+      suppressHydrationWarning
     >
       <Sun
         fill="currentColor"
+        suppressHydrationWarning
         className={`size-4 p-0.5 rounded-full transition-colors ${!isDark ? 'bg-fd-accent text-fd-accent-foreground' : 'text-[#6B6B6B] dark:text-[#9CA3AF]'}`}
       />
       <Moon
         fill="currentColor"
+        suppressHydrationWarning
         className={`size-4 p-0.5 rounded-full transition-colors ${isDark ? 'bg-fd-accent text-fd-accent-foreground' : 'text-[#6B6B6B] dark:text-[#9CA3AF]'}`}
       />
     </button>
