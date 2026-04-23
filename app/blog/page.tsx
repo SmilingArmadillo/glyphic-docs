@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import DocsNav from '@/components/DocsNav'
 import DocsFooter from '@/components/DocsFooter'
 import { blog } from '@/lib/source'
 
@@ -34,7 +33,6 @@ export default function BlogIndexPage() {
   if (posts.length === 0) {
     return (
       <>
-        <DocsNav />
         <main className="max-w-3xl mx-auto px-6 py-14">
           <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#6366F1] mb-3">Blog</p>
           <h1 className="text-4xl font-bold tracking-tight text-[#111] mb-2">Updates &amp; guides</h1>
@@ -50,7 +48,6 @@ export default function BlogIndexPage() {
 
   return (
     <>
-      <DocsNav />
       <main className="max-w-3xl mx-auto px-6 py-14">
         <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#6366F1] mb-3">Blog</p>
         <h1 className="text-4xl font-bold tracking-tight text-[#111] mb-2">Updates &amp; guides</h1>

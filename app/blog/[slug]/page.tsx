@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { blog } from '@/lib/source'
 import { mdxComponents } from '@/components/mdx-components'
-import DocsNav from '@/components/DocsNav'
 import DocsFooter from '@/components/DocsFooter'
 
 interface Props {
@@ -60,7 +59,6 @@ export default function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <DocsNav />
       <main className="max-w-2xl mx-auto px-6 py-14">
         <Link
           href="/blog"
