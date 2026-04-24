@@ -2,10 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { getSupabaseClient } from '@/lib/supabase'
+import { createBrowserClient } from '@supabase/ssr'
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
+
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 function getInitial(user: User): string {
   const name = user.user_metadata?.full_name as string | undefined
@@ -24,7 +29,6 @@ export default function NavUserMenuClient({ user: initialUser }: Props) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const supabase = getSupabaseClient()
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
@@ -51,7 +55,7 @@ export default function NavUserMenuClient({ user: initialUser }: Props) {
 
   async function handleSignOut() {
     setOpen(false)
-    await getSupabaseClient().auth.signOut()
+    await supabase.auth.signOut()
     window.location.href = app('/')
   }
 
