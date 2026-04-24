@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: 2026-04-23
+Last updated: 2026-04-24
 
 GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/projects/4)
 
@@ -8,6 +8,7 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title                                 | Label     | Status |
 |----|---------------------------------------|-----------|--------|
+| #11 | feat: cookie-based auth for server-side nav state (eliminate flash) | type: bug | Open |
 | #9 | fix: docs page typography and spacing | type: bug | Open   |
 
 ## Recently Closed
