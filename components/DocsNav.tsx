@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
 import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import type { User } from '@supabase/supabase-js'
 import NavUserMenu from '@/components/NavUserMenu'
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -46,7 +47,11 @@ function ThemeToggle() {
   )
 }
 
-export default function DocsNav() {
+interface Props {
+  user: User | null
+}
+
+export default function DocsNav({ user }: Props) {
   const pathname = usePathname()
 
   return (
@@ -108,7 +113,7 @@ export default function DocsNav() {
 
       <div className="flex items-center gap-3">
         <ThemeToggle />
-        <NavUserMenu />
+        <NavUserMenu user={user} />
       </div>
     </header>
   )
