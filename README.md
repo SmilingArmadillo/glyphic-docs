@@ -1,5 +1,20 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment
+
+Copy `.env.example` to `.env.local` and fill in the values before running locally:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (same as `VITE_SUPABASE_URL` in mermaid-studio) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key (same as `VITE_SUPABASE_ANON_KEY` in mermaid-studio) |
+
+These are required for the auth-aware nav header. Without them the site will throw on every page load.
+
 ## Getting Started
 
 First, run the development server:

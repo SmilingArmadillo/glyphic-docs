@@ -83,7 +83,6 @@ export default function NavUserMenu() {
       <button
         onClick={() => setOpen(o => !o)}
         aria-label="Account menu"
-        aria-haspopup="menu"
         aria-expanded={open}
         className="w-8 h-8 rounded-full bg-[#6366F1] text-white text-sm font-semibold flex items-center justify-center hover:opacity-85 transition-opacity"
       >
@@ -91,32 +90,28 @@ export default function NavUserMenu() {
       </button>
 
       {open && (
-        <div
-          role="menu"
-          className="absolute right-0 top-full mt-2 min-w-[200px] bg-white dark:bg-[#1A1A1A] border border-[#E5E3DA] dark:border-[#2A2A2A] rounded-xl shadow-lg z-50 overflow-hidden"
-        >
+        <div className="absolute right-0 top-full mt-2 min-w-[200px] bg-white dark:bg-[#1A1A1A] border border-[#E5E3DA] dark:border-[#2A2A2A] rounded-xl shadow-lg z-50 overflow-hidden">
           <div className="px-3.5 py-2.5">
             <span className="block text-xs text-[#6B6B6B] dark:text-[#9CA3AF] truncate">
               {user.email}
             </span>
           </div>
           <div className="h-px bg-[#E5E3DA] dark:bg-[#2A2A2A] my-1" />
-          <a role="menuitem" href={app('/dashboard')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
+          <a href={app('/dashboard')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
             Dashboard
           </a>
-          <a role="menuitem" href={app('/dashboard/account')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
+          <a href={app('/dashboard/account')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
             Account
           </a>
-          <a role="menuitem" href={app('/dashboard/billing')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
+          <a href={app('/dashboard/billing')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
             Billing
           </a>
           <div className="h-px bg-[#E5E3DA] dark:bg-[#2A2A2A] my-1" />
-          <a role="menuitem" href={app('/help')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
+          <a href={app('/help')} className="block w-full px-3.5 py-2 text-sm text-[#1A1A1A] dark:text-[#F5F5F0] hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors">
             Help Center
           </a>
           <div className="h-px bg-[#E5E3DA] dark:bg-[#2A2A2A] my-1" />
           <button
-            role="menuitem"
             onClick={handleSignOut}
             className="block w-full text-left px-3.5 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-[#F5F4EE] dark:hover:bg-[#252525] transition-colors"
           >
