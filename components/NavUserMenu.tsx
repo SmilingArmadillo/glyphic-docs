@@ -7,6 +7,22 @@ import { getSupabaseClient } from '@/lib/supabase'
 const isDev = process.env.NODE_ENV === 'development'
 const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+// Derive the localStorage key Supabase uses: sb-<project-ref>-auth-token
+const projectRef = SUPABASE_URL.match(/https:\/\/([^.]+)\.supabase\.co/)?.[1] ?? ''
+const STORAGE_KEY = `sb-${projectRef}-auth-token`
+
+function readUserFromStorage(): User | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    return parsed?.user ?? null
+  } catch {
+    return null
+  }
+}
+
 function getInitial(user: User): string {
   const name = user.user_metadata?.full_name as string | undefined
   if (name?.trim()) return name.trim()[0].toUpperCase()
@@ -15,15 +31,20 @@ function getInitial(user: User): string {
 }
 
 export default function NavUserMenu() {
-  const [mounted, setMounted] = useState(false)
-  const [user, setUser] = useState<User | null>(null)
+  // Lazy initialiser reads localStorage synchronously on first client render —
+  // eliminates the Login→avatar flash without waiting for getSession().
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window === 'undefined') return null
+    return readUserFromStorage()
+  })
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true)
     const supabase = getSupabaseClient()
 
+    // Validate/refresh the session server-side in the background.
+    // Updates user if the token was revoked or the session changed.
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
     })
@@ -59,8 +80,7 @@ export default function NavUserMenu() {
     window.location.href = app('/')
   }
 
-  // Server render + pre-mount: always show logged-out state to avoid hydration mismatch
-  if (!mounted || !user) {
+  if (!user) {
     return (
       <>
         <a
