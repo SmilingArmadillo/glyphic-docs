@@ -31,20 +31,19 @@ function getInitial(user: User): string {
 }
 
 export default function NavUserMenu() {
-  // Lazy initialiser reads localStorage synchronously on first client render —
-  // eliminates the Login→avatar flash without waiting for getSession().
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window === 'undefined') return null
-    return readUserFromStorage()
-  })
+  const [mounted, setMounted] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Read localStorage synchronously on mount — avatar appears without async delay.
+    setUser(readUserFromStorage())
+    setMounted(true)
+
     const supabase = getSupabaseClient()
 
-    // Validate/refresh the session server-side in the background.
-    // Updates user if the token was revoked or the session changed.
+    // Validate/refresh in the background — clears user if token was revoked.
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
     })
@@ -80,7 +79,7 @@ export default function NavUserMenu() {
     window.location.href = app('/')
   }
 
-  if (!user) {
+  if (!mounted || !user) {
     return (
       <>
         <a
