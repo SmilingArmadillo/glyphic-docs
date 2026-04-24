@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = (path: string) => isDev ? path : `https://glyphic.cc${path}`
@@ -22,6 +22,7 @@ export default function NavUserMenu() {
 
   useEffect(() => {
     setMounted(true)
+    const supabase = getSupabaseClient()
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
@@ -54,7 +55,7 @@ export default function NavUserMenu() {
 
   async function handleSignOut() {
     setOpen(false)
-    await supabase.auth.signOut()
+    await getSupabaseClient().auth.signOut()
     window.location.href = app('/')
   }
 
