@@ -77,6 +77,38 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
+
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a,
+.prose h6 a {
+  text-decoration: none;
+}
+
+[data-fd-card] {
+  text-decoration: none;
+}
+
+/* Scale prose headings down and match muted description color */
+.prose h2 {
+  font-size: 1.2em !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.prose h3 {
+  font-size: 1em !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Remove top spacing so content flows directly after the description */
+.prose,
+.steps,
+.prose > *:first-child {
+  margin-top: 0 !important;
+}
+

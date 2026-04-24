@@ -15,7 +15,7 @@
 ## General
 - ["@config (planned)"](/docs/_planned/config)
 - ["@simulate (planned)"](/docs/_planned/simulate)
-- [Welcome to Glyphic](/docs)
+- [Glyphic Documentation](/docs)
 - ["@animate"](/docs/meta-blocks/animate)
 - ["@compare"](/docs/meta-blocks/compare)
 - [Meta-blocks](/docs/meta-blocks)

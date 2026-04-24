@@ -1,6 +1,6 @@
 # Glyphic — Full Documentation
 
-Generated: 2026-04-22T13:02:51.398Z
+Generated: 2026-04-24T13:50:48.017Z
 
 ---
 
@@ -11,9 +11,97 @@ title: "@config (planned)"
 description: Global diagram configuration — font, colors, animation defaults. Not yet implemented.
 ---
 
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+
 # @config
 
-Coming soon.
+<Callout type="warn">
+**Not yet implemented.** The syntax below is reserved — do not ship diagrams relying on it. This page exists to document planned behaviour before implementation.
+</Callout>
+
+The `@config` block sets global diagram defaults: font, primary colors, animation defaults, and Mermaid base theme. Per-edge and per-node `@animate` entries always override global defaults.
+
+## Font
+
+```text
+@config
+font: IBM Plex Sans
+```
+
+<TypeTable
+  type={{
+    font: {
+      description: "Diagram label font — any Google Fonts family name",
+      type: "string",
+      default: "IBM Plex Sans",
+    },
+  }}
+/>
+
+## Colors
+
+```text
+@config
+primaryColor: #3b82f6
+lineColor: #6b7280
+```
+
+<TypeTable
+  type={{
+    primaryColor: {
+      description: "Node fill / primary color",
+      type: "CSS color",
+      default: "theme default",
+    },
+    lineColor: {
+      description: "Edge stroke color",
+      type: "CSS color",
+      default: "theme default",
+    },
+  }}
+/>
+
+## Mermaid base theme
+
+```text
+@config
+theme: dark
+```
+
+<TypeTable
+  type={{
+    theme: {
+      description: "Mermaid base theme",
+      type: '"dark" | "default" | "forest" | "neutral" | "base"',
+      default: "dark",
+    },
+  }}
+/>
+
+## Global animation defaults
+
+Sets baseline defaults for all animated edges. Per-edge `@animate` entries override these for individual edges.
+
+```text
+@config
+animation.dot.color: #f59e0b
+animation.dot.speed: 1.2
+animation.lineFlow.color: #3b82f6
+animation.lineFlow.speed: 2
+animation.lineFlow.motionPreset: balanced
+animation.lineFlow.glowPreset: none
+```
+
+<TypeTable
+  type={{
+    "animation.dot.color": { description: "Default dot color", type: "CSS color", default: "#3b82f6" },
+    "animation.dot.speed": { description: "Default dot traversal duration in seconds", type: "number", default: "1.5" },
+    "animation.lineFlow.color": { description: "Default segment color", type: "CSS color", default: "#3b82f6" },
+    "animation.lineFlow.speed": { description: "Default cycle duration in seconds", type: "number", default: "1.5" },
+    "animation.lineFlow.motionPreset": { description: "Default motion character", type: '"flash" | "balanced" | "long-hold"', default: "balanced" },
+    "animation.lineFlow.glowPreset": { description: "Default glow", type: '"none" | "subtle" | "strong"', default: "none" },
+  }}
+/>
 
 
 ---
@@ -27,7 +115,13 @@ description: Traffic pattern simulation with dynamic edge speed and node stress 
 
 # @simulate
 
-Coming soon.
+<Callout type="warn">
+**Not yet implemented.** The syntax below is reserved — do not ship diagrams relying on it. This page exists to document planned behaviour before implementation.
+</Callout>
+
+The `@simulate` block runs a traffic simulation on the diagram — dynamically varying edge animation speed and node stress state based on configurable load patterns.
+
+Full syntax and parameter reference will be added when the feature ships.
 
 
 ---
@@ -39,35 +133,85 @@ title: Editor Basics
 description: The editor layout, toolbar, keyboard shortcuts, file upload, and the Examples dropdown — everything you need to work efficiently in Glyphic.
 ---
 
-# Editor Basics
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
 
 ## Layout
 
-The editor is a two-column layout: source on the left, live preview on the right. The toolbar runs across the top.
+The editor is a two-column layout: source code on the left, live preview on the right. The toolbar runs across the top.
+
+```
+[Logo] [Examples ▼]          [Share] [Export ▼] [Light/Dark] [Grid] [Prettify]
+┌─────────────────────┬─────────────────────────────┐
+│                     │                             │
+│   Source editor     │     Live preview            │
+│   (code panel)      │     (diagram panel)         │
+│                     │                             │
+└─────────────────────┴─────────────────────────────┘
+```
+
+The preview updates as you type — no save or render button needed.
+
+## Toolbar
+
+<Accordions>
+  <Accordion title="Examples — load a pre-built diagram">
+
+Click **Examples** to open a dropdown of curated diagrams. Selecting one loads the full source (including any meta-blocks) into the editor.
+
+Use examples to learn meta-block syntax or to start from a working template.
+
+  </Accordion>
+  <Accordion title="Share — create a shareable link">
+
+Click **Share** to generate a link to your diagram.
+
+- **Editable** — anyone with the link can view and edit the diagram
+- **View Only** — the diagram renders but the source is never exposed to the viewer
+
+See [Sharing](/docs/guides/sharing) for full details and embed snippets.
+
+  </Accordion>
+  <Accordion title="Export — download your diagram">
+
+Click **Export** to download in your chosen format. Animated exports (GIF, WebM) capture the running animation from the preview.
+
+See [Exporting](/docs/guides/exporting) for format details.
+
+  </Accordion>
+  <Accordion title="Light/Dark — toggle editor theme">
+
+Switches between light and dark themes for both the editor panel and the preview background. The Mermaid theme updates to match.
+
+  </Accordion>
+  <Accordion title="Grid — toggle dot grid background">
+
+Shows or hides the dot grid on the preview background. The grid is not included in exports.
+
+  </Accordion>
+  <Accordion title="Prettify — render with R DiagrammeR">
+
+Renders the diagram using R DiagrammeR instead of the default Mermaid renderer. Produces a different visual style. Not all diagram types are supported.
+
+  </Accordion>
+</Accordions>
 
 ## Keyboard shortcuts
 
 | Shortcut | Action |
-|---|---|
-| `⌘S` / `Ctrl+S` | Save (no-op in browser, triggers export prompt in app) |
-| `⌘K` | Open search |
-| `⌘Z` | Undo |
-| `⌘⇧Z` | Redo |
-| `⌘+` | Zoom in |
-| `⌘-` | Zoom out |
-| `⌘0` | Reset zoom |
+|----------|--------|
+| `⌘Z` / `Ctrl+Z` | Undo |
+| `⌘⇧Z` / `Ctrl⇧Z` | Redo |
+| `⌘+` / `Ctrl+` | Zoom in |
+| `⌘-` / `Ctrl-` | Zoom out |
+| `⌘0` / `Ctrl0` | Reset zoom |
 
 ## File upload
 
-Drag a `.mmd` or `.txt` file onto the editor to load it. Click the upload area to browse.
+Drag a `.mmd` or `.txt` file onto the editor panel to load it. You can also click the upload area to browse for a file. The file contents replace the current source.
 
-## The toolbar
+## Zoom controls
 
-```
-[Logo] [Examples ▼] [Share] [Export ▼] [Light/Dark] [Grid] [Prettify]
-```
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+Use the floating zoom controls in the bottom-right of the preview panel to zoom and pan. Click the reset button to fit the diagram to the panel.
 
 
 ---
@@ -76,28 +220,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 ---
 title: Getting Started
-description: Everything you need to start using Glyphic — from installation to your first animated diagram.
+description: Everything you need to start using Glyphic — from your first diagram to animated exports.
 ---
 
-# Getting Started
+import { Card, Cards } from 'fumadocs-ui/components/card'
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Glyphic runs entirely in the browser for the core editor experience, with an optional backend for sharing and server-side rendering.
-
-## Prerequisites
-
-| Requirement | Version |
-|---|---|
-| Modern browser | Chrome 110+, Firefox 115+, Safari 16+ |
-| Node.js (for self-hosting) | 18.x or later |
-| pnpm (for self-hosting) | 8.x or later |
-
-## What's in this section
-
-- **Installation** — add Glyphic to your workflow or self-host it
-- **Quickstart** — render your first diagram in under two minutes
-- **Your First Project** — a complete walkthrough from blank canvas to shared link
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+<Cards>
+  <Card title="Quickstart" href="/docs/getting-started/quickstart" description="Render your first animated diagram in under two minutes." />
+  <Card title="Editor Basics" href="/docs/getting-started/editor-basics" description="Toolbar, keyboard shortcuts, file upload, zoom controls." />
+</Cards>
 
 
 ---
@@ -106,54 +237,73 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 ---
 title: Quickstart
-description: Render your first Mermaid diagram in Glyphic in under two minutes.
+description: Render your first Mermaid diagram — with animation — in under two minutes.
 ---
 
-# Quickstart
+import { Steps, Step } from 'fumadocs-ui/components/steps'
 
-## Step 1: Open the editor
+<Steps>
+  <Step>
 
-Navigate to [glyphic.cc/app](https://glyphic.cc/app). The editor opens with an example diagram pre-loaded.
+## Open the editor
 
-## Step 2: Write a diagram
+Go to [glyphic.cc/app](https://glyphic.cc/app). The editor opens with an example diagram pre-loaded in the left panel and a live preview on the right.
+
+  </Step>
+  <Step>
+
+## Write a diagram
 
 Clear the editor and paste:
 
-```mermaid
-flowchart TD
-  A[User] --> B[Load Balancer]
-  B --> C[API Server]
-  C --> D[(Database)]
+```text
+flowchart LR
+  User[User] --> LB[Load Balancer]
+  LB --> S1[Server 1]
+  LB --> S2[Server 2]
+  S1 --> DB[(Database)]
+  S2 --> DB
 ```
 
-The preview panel on the right updates instantly.
+The preview updates instantly.
 
-## Step 3: Add an animation
+  </Step>
+  <Step>
 
-Append this block below your diagram:
+## Add an animation
 
-```
+Append this block below your diagram (after the last line, no blank line required):
+
+```text
 @animate
-  A -> B: duration=1s delay=0
-  B -> C: duration=1s delay=0.5s
-  C -> D: duration=1s delay=1s
-@end
+User-->LB: type=line-flow, color=#38bdf8, speed=2
+LB-->S1: type=line-flow, color=#22c55e, speed=2.5
+LB-->S2: type=line-flow, color=#22c55e, speed=2.5
 ```
 
-Click the play button in the preview panel. Edges animate in sequence.
+The edges begin animating in the preview immediately.
 
-## Step 4: Export
+  </Step>
+  <Step>
 
-Click **Export** in the toolbar and choose **GIF** to download an animated export.
+## Export
 
-| Export format | Use case |
-|---|---|
-| SVG | Scalable, embeddable in docs |
+Click **Export** in the toolbar and choose a format:
+
+| Format | Best for |
+|--------|----------|
+| SVG | Docs, READMEs, embedding |
 | PNG | Slide decks, PR comments |
 | GIF | Animated, universal support |
 | WebM | High-quality video, Notion embeds |
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </Step>
+</Steps>
+
+## Next steps
+
+- [Editor Basics](/docs/getting-started/editor-basics) — toolbar, keyboard shortcuts, file upload
+- [@animate reference](/docs/meta-blocks/animate) — full parameter reference for edge and node animations
 
 
 ---
@@ -165,9 +315,46 @@ title: Exporting
 description: Export your diagram as SVG, PNG, GIF, or WebM. Each format has a different use case.
 ---
 
-# Exporting
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
 
-Coming soon.
+Click **Export** in the toolbar to download your diagram. Animated exports capture the running animation from the preview.
+
+## Formats
+
+<Accordions>
+  <Accordion title="SVG — scalable, embeddable">
+
+SVG exports the diagram as a scalable vector graphic. The file is self-contained and can be embedded in HTML, Markdown (GitHub, Notion), or any docs platform.
+
+**Best for:** Documentation, READMEs, web pages.
+
+**Note:** SVG exports are static — animations and meta-block effects are not included.
+
+  </Accordion>
+  <Accordion title="PNG — raster image">
+
+PNG exports the diagram as a fixed-resolution raster image.
+
+**Best for:** Slide decks, PR comments, screenshots.
+
+**Note:** PNG exports are static.
+
+  </Accordion>
+  <Accordion title="GIF — animated, universal">
+
+GIF captures the running animation from the preview panel and exports it as a looping animated GIF.
+
+**Best for:** Sharing animations in contexts that don't support video (email, Jira, GitHub issues).
+
+  </Accordion>
+  <Accordion title="WebM — high-quality animated video">
+
+WebM captures the running animation as a high-quality video file.
+
+**Best for:** Notion embeds, Loom uploads, presentations where video quality matters.
+
+  </Accordion>
+</Accordions>
 
 
 ---
@@ -178,8 +365,6 @@ Coming soon.
 title: Guides
 description: Step-by-step walkthroughs for sharing and exporting your Glyphic diagrams.
 ---
-
-# Guides
 
 | Guide | What you'll learn |
 |---|---|
@@ -196,9 +381,89 @@ title: Sharing
 description: Share your diagram as an editable link or a view-only embed. Learn the difference and how to generate each.
 ---
 
-# Sharing
+import { Steps, Step } from 'fumadocs-ui/components/steps'
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
 
-Coming soon.
+Glyphic has two share modes:
+
+| Mode | Who can edit | Source visible to viewer |
+|------|-------------|--------------------------|
+| Editable | Anyone with the link | Yes |
+| View Only | No one (read-only) | No — rendered server-side |
+
+## Creating a share link
+
+<Steps>
+  <Step>
+
+## Open the Share modal
+
+Click **Share** in the toolbar.
+
+  </Step>
+  <Step>
+
+## Choose a mode
+
+Select **Editable** or **View Only**.
+
+  </Step>
+  <Step>
+
+## Copy the link
+
+Copy the generated URL. Anyone with the link can open the diagram.
+
+  </Step>
+</Steps>
+
+## Embedding
+
+<Tabs items={["Script tag", "iframe"]}>
+  <Tab value="Script tag">
+
+Use the `embed.js` loader for Notion, Confluence, or any page that allows `<script>` tags:
+
+```html
+<script src="https://glyphic.cc/embed.js"
+  data-src="YOUR_SHARE_ID"
+  data-theme="dark">
+</script>
+```
+
+The script reads its own `data-*` attributes and replaces itself with an `<iframe>`.
+
+| Attribute | Default | Description |
+|-----------|---------|-------------|
+| `data-src` | required | Share ID from the share URL |
+| `data-theme` | `dark` | Theme hint |
+| `data-width` | `800` | iframe width (px or %) |
+| `data-height` | `500` | iframe height (px) |
+
+  </Tab>
+  <Tab value="iframe">
+
+For full control, use the `<iframe>` directly:
+
+```html
+<iframe
+  src="https://glyphic.cc/embed/YOUR_SHARE_ID"
+  width="800"
+  height="500"
+  frameborder="0">
+</iframe>
+```
+
+  </Tab>
+</Tabs>
+
+<Callout type="info">
+The embed URL (`/embed/YOUR_SHARE_ID`) renders a chromeless version of the shared diagram — no header, no toolbar, no zoom controls. All meta-blocks (`@animate`, `@present`, `@compare`) work identically to the full editor view.
+</Callout>
+
+<Callout type="warn">
+GitHub READMEs block iframes. A static `preview.svg` badge endpoint is planned.
+</Callout>
 
 
 ---
@@ -206,36 +471,41 @@ Coming soon.
 ## /docs
 
 ---
-title: Welcome to Glyphic
+title: Glyphic Documentation
 description: Glyphic is a visual editor for Mermaid diagrams. Build, animate, and share architecture diagrams without leaving your browser.
 ---
 
-# Welcome to Glyphic
+import { Card, Cards } from 'fumadocs-ui/components/card'
 
-Glyphic turns plain-text Mermaid diagrams into living, interactive visuals. Whether you're documenting a microservices architecture, walking through a deploy pipeline, or presenting a system design in a team meeting, Glyphic gives you the tools to make diagrams that move, compare, and tell stories.
+# Glyphic Documentation
 
-## What you can do with Glyphic
+Glyphic turns plain-text Mermaid diagrams into living, interactive visuals — with animation, status overlays, presentation labels, and before/after comparison built in.
 
-- **Edit** Mermaid source in a live editor with instant preview
-- **Animate** edges and nodes with the `@animate` meta-block
-- **Compare** before/after states with `@compare` split view
-- **Export** diagrams as SVG, PNG, GIF, or WebM
-- **Share** a view-only link so teammates see the diagram without touching the source
+## Start here
 
-## How this documentation is organized
+<Cards>
+  <Card title="Quickstart" href="/docs/getting-started/quickstart" description="Render your first animated diagram in under two minutes." />
+  <Card title="Editor Basics" href="/docs/getting-started/editor-basics" description="Learn the toolbar, keyboard shortcuts, and file upload." />
+</Cards>
 
-| Section | What you'll find |
-|---|---|
-| Getting Started | Install, first project, quickstart guide |
-| Guides | Core concepts, editor workflow, animations, deployment |
-| API Reference | Authentication, Editor API, Rendering API, Webhooks |
+## Meta-blocks
 
-## Quick links
+Glyphic extends Mermaid with meta-blocks — directives appended after the diagram definition.
 
-- [Installation](/docs/getting-started/installation)
-- [Quickstart](/docs/getting-started/quickstart)
-- [Core Concepts](/docs/guides/core-concepts)
-- [Editor API](/docs/api-reference/editor-api)
+<Cards>
+  <Card title="@animate" href="/docs/meta-blocks/animate" description="Animate edges with flowing particles and nodes with pulsing borders." />
+  <Card title="@status" href="/docs/meta-blocks/status" description="Live NOC board — map nodes to healthy, degraded, or down states." />
+  <Card title="@compare" href="/docs/meta-blocks/compare" description="Before/after split view with optional diff highlighting." />
+  <Card title="@present" href="/docs/meta-blocks/present" description="Add badges and fixed overlays to your diagram." />
+  <Card title="@style" href="/docs/meta-blocks/style" description="Set static node outline colors." />
+</Cards>
+
+## Guides
+
+<Cards>
+  <Card title="Sharing" href="/docs/guides/sharing" description="Editable links, View Only links, and embed snippets." />
+  <Card title="Exporting" href="/docs/guides/exporting" description="SVG, PNG, GIF, and WebM — formats and when to use each." />
+</Cards>
 
 
 ---
@@ -244,12 +514,333 @@ Glyphic turns plain-text Mermaid diagrams into living, interactive visuals. Whet
 
 ---
 title: "@animate"
-description: Animate edges and nodes in your Mermaid diagram with flowing particles, pulsing borders, and status indicators.
+description: Animate edges and nodes in your Mermaid diagram with flowing particles, pulsing borders, and status indicator dots.
 ---
 
-# @animate
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
-Coming soon.
+The `@animate` block controls animations on individual edges and nodes. Each line targets either an edge (`A-->B`) or a node (`NodeId`).
+
+```text
+@animate
+Client-->Server: type=line-flow, color=#38bdf8, speed=2
+Server: type=node-pulse, pulseStyle=ripple, color=#ef4444, speed=1.4
+```
+
+<Tabs items={["Edge animations", "Node animations"]}>
+  <Tab value="Edge animations">
+
+## Edge animations
+
+```text
+@animate
+{from}-->{to}: type={type}, [param=value, ...]
+```
+
+<Accordions>
+  <Accordion title="type=line-flow — segment draws on, holds, then retracts">
+
+A segment of the edge animates: draws on, holds, then retracts and fades. Repeats indefinitely.
+
+```text
+@animate
+Client-->Server: type=line-flow, color=#38bdf8, speed=2, preset=balanced, glow=subtle
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Line segment color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration of one full cycle in seconds",
+      type: "number",
+      default: "1.5",
+    },
+    preset: {
+      description: "Motion character",
+      type: '"flash" | "balanced" | "long-hold"',
+      default: "balanced",
+    },
+    glow: {
+      description: "Blur filter around the segment",
+      type: '"none" | "subtle" | "strong"',
+      default: "none",
+    },
+  }}
+/>
+
+**Presets:**
+
+| Preset | Character |
+|--------|-----------|
+| `flash` | Short segment, fast travel — urgent, rapid traffic |
+| `balanced` | Medium segment, moderate speed — default working state |
+| `long-hold` | Long segment, slow travel — steady, high-volume throughput |
+
+  </Accordion>
+  <Accordion title="type=dot — small dot travels along the edge">
+
+```text
+@animate
+A-->B: type=dot, color=#f59e0b, speed=1.2
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Dot fill color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration per traversal in seconds",
+      type: "number",
+      default: "1.5",
+    },
+  }}
+/>
+
+  </Accordion>
+  <Accordion title="type=pill — rounded rectangle travels tangent-aligned">
+
+A rounded rectangle travels along the edge, rotating to stay tangent-aligned to the path direction. Supports an optional halo glow.
+
+```text
+@animate
+A-->B: type=pill, color=#4fc3f7, speed=1.5
+B-->C: type=pill, color=#7ee787, speed=1, glow=strong
+C-->D: type=pill, color=#f59e0b, speed=0.8, glow=subtle, width=24, height=12
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Pill fill color",
+      type: "CSS color",
+      default: "#4fc3f7",
+    },
+    speed: {
+      description: "Duration per full traversal in seconds",
+      type: "number",
+      default: "2",
+    },
+    glow: {
+      description: "Halo blur around the pill",
+      type: '"none" | "subtle" | "strong"',
+      default: "subtle",
+    },
+    width: {
+      description: "Pill length along the travel axis in px",
+      type: "number",
+      default: "28",
+    },
+    height: {
+      description: "Pill thickness in px; corner radius = height / 2",
+      type: "number",
+      default: "14",
+    },
+  }}
+/>
+
+<Callout type="info">
+Pills use the CSS Motion Path spec (`offset-path` + `offset-rotate: auto`) for tangent-aligned travel. They follow curves and diagonal edges and rotate to face the direction of travel at every point.
+</Callout>
+
+  </Accordion>
+</Accordions>
+
+  </Tab>
+  <Tab value="Node animations">
+
+## Node animations
+
+Node animations target a node by its ID (not an edge).
+
+<Accordions>
+  <Accordion title="type=node-pulse — pulsing border, fill, shadow, flash, or ripple">
+
+```text
+@animate
+{nodeId}: type=node-pulse, [param=value, ...]
+```
+
+```text
+@animate
+Server: type=node-pulse, pulseStyle=border, color=#ef4444, speed=1.5
+Server: type=node-pulse, pulseStyle=flash,  color=#ef4444, speed=1
+Server: type=node-pulse, pulseStyle=ripple, color=#ef4444, speed=1.4, rippleCount=3
+```
+
+<TypeTable
+  type={{
+    pulseStyle: {
+      description: "Visual effect",
+      type: '"border" | "fill" | "shadow" | "flash" | "ripple"',
+      default: "border",
+    },
+    color: {
+      description: "Pulse or ring color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    speed: {
+      description: "Duration of one cycle in seconds",
+      type: "number",
+      default: "1.5",
+    },
+    rippleCount: {
+      description: "Number of staggered rings (ripple style only)",
+      type: "1 | 2 | 3",
+      default: "1",
+    },
+  }}
+/>
+
+**`pulseStyle` variants:**
+
+| Style | Effect | Use case |
+|-------|--------|----------|
+| `border` | Smooth opacity oscillation on a border ring | Persistent warning, attention state |
+| `fill` | Animates the fill opacity of the node shape | Highlighting, selection |
+| `shadow` | Border ring with Gaussian blur glow | Emphasis, "active" state |
+| `flash` | Hard on/off strobe | Urgent alert, error state |
+| `ripple` | Expanding rings radiate outward and fade | Broadcasting, active transmission |
+
+<Callout type="info">
+**`flash` color tip:** Choose a color that contrasts with the node's static border. If the flash color matches the existing `classDef` stroke or `@style outline` color, the strobe will be invisible.
+</Callout>
+
+  </Accordion>
+  <Accordion title="type=oval-inset — filled oval in the left cap of a stadium node">
+
+A filled oval injected into the left cap of a stadium (pill-shaped) node. Use with nodes declared using the `([text])` stadium syntax.
+
+```text
+@animate
+S1: type=oval-inset, color=#22c55e
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Fill color of the oval",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+  }}
+/>
+
+<Callout type="warn">
+The node must use stadium shape (`([NodeId])`) syntax in the flowchart. On standard rect-shaped nodes the oval will appear misaligned.
+</Callout>
+
+Combine with `classDef` for full control over border and fill:
+
+```text
+flowchart LR
+  S1([S1])
+  classDef serverNode fill:#052e16,stroke:#22c55e,stroke-width:2px,color:#e2e8f0
+  class S1 serverNode
+
+@animate
+S1: type=oval-inset, color=#22c55e
+```
+
+  </Accordion>
+  <Accordion title="type=status-dot — animated indicator dot on any node">
+
+A small animated dot injected into or adjacent to any node shape. Supports four animation styles and seven positions.
+
+```text
+@animate
+GW: type=status-dot, style=breathe, color=#22c55e, position=left, size=10
+Auth: type=status-dot, style=sonar, color=#f59e0b, position=left, rippleCount=2, label="Auth Service"
+Payment: type=status-dot, style=blink, color=#ef4444, position=left, label="Payment — down"
+legend dot: position=below-center, padding=16
+```
+
+<TypeTable
+  type={{
+    style: {
+      description: "Animation style",
+      type: '"breathe" | "blink" | "sonar" | "ripple"',
+      default: "breathe",
+    },
+    color: {
+      description: "Dot fill and ring color",
+      type: "CSS color",
+      default: "#3b82f6",
+    },
+    position: {
+      description: "Placement relative to the node",
+      type: '"left" | "right" | "top-left" | "top-right" | "top-center" | "left-inset" | "center"',
+      default: "left",
+    },
+    size: {
+      description: "Dot diameter in px",
+      type: "number",
+      default: "10",
+    },
+    speed: {
+      description: "One animation cycle duration in seconds",
+      type: "number",
+      default: "2",
+    },
+    rippleCount: {
+      description: "Number of staggered rings (sonar and ripple styles only)",
+      type: "1 | 2 | 3",
+      default: "1",
+    },
+    label: {
+      description: "Legend row text — omit to exclude from legend",
+      type: "string",
+      default: "—",
+    },
+  }}
+/>
+
+**Animation styles:**
+
+| Style | Effect | Use case |
+|-------|--------|----------|
+| `breathe` | Smooth opacity oscillation | Soft, persistent indicator |
+| `blink` | Hard on/off strobe | Urgent alert, error |
+| `sonar` | Expanding stroked rings | Broadcasting, active transmission |
+| `ripple` | Expanding filled semi-transparent rings | Softer broadcast |
+
+**`legend dot:` line**
+
+When present, renders a floating chip row showing nodes that have a `label=` value. Nodes without `label=` are omitted. The legend is not included in SVG/PNG exports.
+
+```text
+legend dot: position=below-center, padding=16
+```
+
+<TypeTable
+  type={{
+    position: {
+      description: "Legend panel anchor",
+      type: '"top-left" | "top-center" | "top-right" | "middle-left" | "middle-right" | "below-left" | "below-center" | "below-right"',
+      default: "below-center",
+    },
+    padding: {
+      description: "Offset from panel edge in px",
+      type: "number",
+      default: "12",
+    },
+  }}
+/>
+
+  </Accordion>
+</Accordions>
+
+  </Tab>
+</Tabs>
 
 
 ---
@@ -261,9 +852,95 @@ title: "@compare"
 description: Show two diagram states side-by-side with before/after split view and optional diff highlighting.
 ---
 
-# @compare
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
-Coming soon.
+The `@compare split` marker splits a single `.mmd` file into two diagram states shown side-by-side. Everything above the marker is the "before" diagram; everything below (up to `@compare`) is the "after" diagram.
+
+## Syntax
+
+```text
+{before diagram source}
+{optional meta-blocks for before}
+
+@compare split
+
+{after diagram source}
+{optional meta-blocks for after}
+
+@compare
+title before: "{label}"
+title after: "{label}"
+```
+
+## Example
+
+```text
+flowchart LR
+  A --> Server
+
+@animate
+A-->Server: type=line-flow, color=#ef4444, speed=1
+
+@present
+badge Server: "⚠ Overloaded" type=error
+
+@compare split
+
+flowchart LR
+  A --> LB --> S1
+  A --> LB --> S2
+
+@animate
+A-->LB: type=line-flow, color=#38bdf8, speed=2
+LB-->S1: type=line-flow, color=#22c55e, speed=2.5
+LB-->S2: type=line-flow, color=#22c55e, speed=2.5
+
+@present
+overlay top-right: "✓ Balanced" position=fixed color=#10b981
+
+@compare
+title before: "⚠ Congested"
+title after: "✓ Load Balanced"
+```
+
+## `@compare` block parameters
+
+<TypeTable
+  type={{
+    "title before": {
+      description: "Label shown above the left (before) panel",
+      type: "string",
+      default: "—",
+    },
+    "title after": {
+      description: "Label shown above the right (after) panel",
+      type: "string",
+      default: "—",
+    },
+    diff: {
+      description: "Enable automatic diff highlighting between the two states",
+      type: "true | false",
+      default: "false",
+    },
+  }}
+/>
+
+## Diff highlighting
+
+Add `diff: true` to the `@compare` block to automatically highlight structural changes:
+
+- **Before panel** — nodes and edges absent from the after diagram are highlighted red
+- **After panel** — nodes and edges new in the after diagram are highlighted green
+- Shared nodes and edges render without any highlight
+
+A legend (`● added  ● removed`) appears at the bottom of the split view when `diff: true` is set.
+
+```text
+@compare
+title before: "⚠ Congested"
+title after: "✓ Load Balanced"
+diff: true
+```
 
 
 ---
@@ -275,9 +952,51 @@ title: Meta-blocks
 description: Glyphic extends Mermaid with meta-blocks — structured directives that add animation, status overlays, presentation labels, and split-view comparison without changing your Mermaid source.
 ---
 
-# Meta-blocks
+import { Card, Cards } from 'fumadocs-ui/components/card'
 
-Coming soon.
+Meta-blocks are Glyphic-specific extensions appended **after** the diagram definition. They use a simple keyword syntax:
+
+```text
+flowchart LR
+  A --> B --> C
+
+@animate
+A-->B: type=line-flow, color=#38bdf8, speed=2
+
+@present
+badge B: "Processing" type=info
+
+@compare split
+
+flowchart LR
+  A --> B
+
+@compare
+title before: "Before"
+title after: "After"
+```
+
+<Callout type="info">
+**Mermaid compatible.** Strip everything from the first `@` line downward and you have valid, portable Mermaid that renders in any standard renderer. Meta-blocks are purely additive.
+</Callout>
+
+## Directives
+
+<Cards>
+  <Card title="@animate" href="/docs/meta-blocks/animate" description="Animate edges with flowing particles and nodes with pulsing borders or status dots." />
+  <Card title="@style" href="/docs/meta-blocks/style" description="Set static visual styles on nodes — outline color and more." />
+  <Card title="@status" href="/docs/meta-blocks/status" description="Turn your diagram into a live NOC board by mapping nodes to health states." />
+  <Card title="@present" href="/docs/meta-blocks/present" description="Add badges to nodes and fixed text overlays on the canvas." />
+  <Card title="@compare" href="/docs/meta-blocks/compare" description="Show two diagram states side-by-side with optional diff highlighting." />
+</Cards>
+
+## Syntax rules
+
+- Meta-blocks follow the diagram definition — never before it
+- Each block opens with `@keyword` on its own line
+- Entries continue until the next `@keyword` or end of file
+- Meta-blocks are case-sensitive
+- Multiple meta-blocks can appear in the same file
 
 
 ---
@@ -286,12 +1005,95 @@ Coming soon.
 
 ---
 title: "@present"
-description: Add presentation overlays to your diagram — badges attached to nodes and fixed text overlays positioned on the canvas.
+description: Add presentation overlays to your diagram — badges attached to nodes and fixed text labels positioned on the canvas.
 ---
 
-# @present
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
-Coming soon.
+The `@present` block adds visual labels to the diagram: badges attached to nodes and fixed overlays positioned on the canvas.
+
+```text
+@present
+badge {nodeId}: "{text}" [type={type}] [color={color}] [position={position}]
+overlay {anchor}: "{text}" [color={color}] position=fixed
+```
+
+<Tabs items={["badge", "overlay"]}>
+  <Tab value="badge">
+
+## `badge`
+
+A pill-shaped label rendered in the SVG, attached to a node and moving with it.
+
+```text
+@present
+badge Server: "⚠ Overloaded" type=error
+badge LB: "Load Balancer" type=info
+badge DB: "Healthy" type=success color=#10b981
+```
+
+<TypeTable
+  type={{
+    type: {
+      description: "Preset color scheme",
+      type: '"info" | "success" | "warning" | "error"',
+      default: "—",
+    },
+    color: {
+      description: "Override badge background color",
+      type: "CSS color",
+      default: "grey",
+    },
+    position: {
+      description: "Attached moves with diagram; fixed stays in viewport",
+      type: '"attached" | "fixed"',
+      default: "attached",
+    },
+  }}
+/>
+
+**Type color presets:**
+
+| Type | Background | Text |
+|------|-----------|------|
+| `info` | `#3b82f6` (blue) | white |
+| `success` | `#10b981` (green) | white |
+| `warning` | `#f59e0b` (amber) | black |
+| `error` | `#ef4444` (red) | white |
+
+  </Tab>
+  <Tab value="overlay">
+
+## `overlay`
+
+A text label positioned at a fixed viewport location. Useful for metric callouts, status text, or diagram annotations.
+
+```text
+@present
+overlay top-right: "Queue: 500+" position=fixed color=#ef4444
+overlay bottom-left: "p99: 2.3s" position=fixed color=#ef4444
+```
+
+<TypeTable
+  type={{
+    color: {
+      description: "Text color",
+      type: "CSS color",
+      default: "—",
+    },
+    position: {
+      description: "Must be 'fixed' for overlays",
+      type: '"fixed"',
+      default: "fixed",
+    },
+  }}
+/>
+
+**Anchor values:** `top-left`, `top-right`, `bottom-left`, `bottom-right`, `top-center`, `bottom-center`
+
+  </Tab>
+</Tabs>
 
 
 ---
@@ -303,9 +1105,96 @@ title: "@status"
 description: Turn your diagram into a live NOC board by mapping nodes to health states — healthy, degraded, or down.
 ---
 
-# @status
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
-Coming soon.
+The `@status` block maps diagram nodes to health states, turning the diagram into a NOC board. Each node gets a colored border, a badge chip straddling its top edge, and a pulsing animation. A floating legend can show per-node detail labels.
+
+```text
+@status
+[legend: position={anchor}, padding={px}]
+{nodeId}: state={healthy|degraded|down} [, label="{text}"]
+```
+
+## States
+
+| state= | Border | Badge | Animation |
+|--------|--------|-------|-----------|
+| `healthy` | green `#22c55e` | green "HEALTHY" | slow breathe (border, 2.5s) |
+| `degraded` | amber `#f59e0b` | amber "DEGRADED" | faster pulse (border, 1.2s) |
+| `down` | red `#ef4444` | red "DOWN" | flash strobe (0.8s) |
+
+## Example
+
+```text
+flowchart LR
+  GW([API Gateway])
+  Auth([Auth Service])
+  Payment([Payment])
+  Orders([Orders])
+
+  GW --> Auth
+  GW --> Payment
+  GW --> Orders
+
+@status
+legend: position=below-center, padding=16
+GW: state=healthy, label="p99: 32ms · 99.9% uptime"
+Auth: state=degraded, label="p99: 840ms · elevated latency"
+Payment: state=down, label="last seen 3m ago · circuit open"
+Orders: state=healthy
+```
+
+## Parameters
+
+<TypeTable
+  type={{
+    state: {
+      description: "Health state for the node",
+      type: '"healthy" | "degraded" | "down"',
+      default: "—",
+    },
+    label: {
+      description: "Legend row text — omit to exclude node from legend",
+      type: "string",
+      default: "—",
+    },
+  }}
+/>
+
+## `legend:` line
+
+Optional. Renders a floating chip row showing nodes that have a `label=` value. Nodes without `label=` are omitted. The legend is not included in SVG/PNG exports.
+
+<TypeTable
+  type={{
+    position: {
+      description: "Legend panel anchor",
+      type: '"top-left" | "top-center" | "top-right" | "middle-left" | "middle-right" | "below-left" | "below-center" | "below-right"',
+      default: "below-center",
+    },
+    padding: {
+      description: "Offset from panel edge in px",
+      type: "number",
+      default: "12",
+    },
+  }}
+/>
+
+## Combining with `@animate` and `@style`
+
+Explicit `@animate` or `@style` entries for the same node override the status-derived defaults:
+
+```text
+@status
+GW: state=healthy
+
+@animate
+GW: type=node-pulse, pulseStyle=ripple, color=#22c55e, speed=1.5
+```
+
+The `@animate` entry for `GW` overrides the default `border` pulse from `@status`, using `ripple` instead.
+
+Both `@status` and `type=status-dot` can appear in the same diagram. `@status` controls border color, badge chip, and border animation; `status-dot` adds a separate animated indicator dot. See [@animate — status-dot](/docs/meta-blocks/animate) for details.
 
 
 ---
@@ -314,12 +1203,59 @@ Coming soon.
 
 ---
 title: "@style"
-description: Set static visual styles on nodes — outline color and more.
+description: Set static visual styles on diagram nodes — outline (border) color.
 ---
 
-# @style
+import { TypeTable } from 'fumadocs-ui/components/type-table'
 
-Coming soon.
+The `@style` block sets static visual styles on nodes. Each line targets a node by ID.
+
+```text
+@style
+{nodeId}: outline={color}
+```
+
+## `outline`
+
+Sets the stroke (border) color of the node's shape.
+
+```text
+@style
+Users: outline=#4fc3f7
+API: outline=#f59e0b
+DB: outline=#ef4444
+```
+
+<TypeTable
+  type={{
+    outline: {
+      description: "Stroke color of the node shape. Accepts any CSS color value: named colors, hex, rgb, etc.",
+      type: "CSS color",
+      default: "—",
+    },
+  }}
+/>
+
+All node shapes are supported: rectangles (`[text]`), stadiums (`([text])`), cylinders (`[(text)]`), diamonds (`{text}`), and others.
+
+<Callout type="info">
+`@style` works without `@animate`. You can set an outline color on a node without adding any animation.
+</Callout>
+
+## Combining with `@animate`
+
+```text
+flowchart LR
+  Users([Users])
+  API[API Gateway]
+  Users --> API
+
+@style
+Users: outline=#4fc3f7
+
+@animate
+Users-->API: type=line-flow, color=#4fc3f7, speed=2
+```
 
 
 ---

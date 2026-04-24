@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { source } from '@/lib/source'
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from 'fumadocs-ui/page'
 import { mdxComponents } from '@/components/mdx-components'
+import { perfStart } from '@/lib/perf-log'
 
 interface Props {
   params: { slug?: string[] }
@@ -38,10 +39,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
+  const end = perfStart(`docs/page [${params.slug?.join('/') ?? 'index'}]`)
   const page = source.getPage(params.slug)
-  if (!page) notFound()
+  if (!page) { end(); notFound() }
 
   const MDX = page.data.body
+  end()
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -62,8 +65,8 @@ export default async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
+      <DocsDescription className="mb-4">{page.data.description}</DocsDescription>
+      <DocsBody className="pt-0">
         <MDX components={mdxComponents} />
       </DocsBody>
     </DocsPage>

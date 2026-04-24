@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { RootProvider } from 'fumadocs-ui/provider'
 import DocsNav from '@/components/DocsNav'
+import NavTiming from '@/components/NavTiming'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <RootProvider>
+          <NavTiming />
           <DocsNav />
           {children}
         </RootProvider>
