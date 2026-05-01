@@ -56,7 +56,7 @@ export default function NavUserMenuClient({ user: initialUser }: Props) {
   async function handleSignOut() {
     setOpen(false)
     await supabase.auth.signOut()
-    window.location.href = app('/')
+    window.location.href = app('/') + '?signed_out=1'
   }
 
   if (!user) {

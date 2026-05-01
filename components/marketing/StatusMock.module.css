@@ -1,0 +1,100 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  height: 100%;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* ── Left: dark code panel ── */
+.code {
+  background: #1a1714;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid #2e2a26;
+}
+.codeLabel {
+  flex-shrink: 0;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; color: #6b6560;
+  text-transform: uppercase;
+  padding: 10px 12px 6px;
+}
+.codeBody {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 12px 12px;
+  font-size: 10px;
+  line-height: 1.7;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  white-space: pre;
+  color: #a89f93;
+}
+
+/* ── Right: light preview panel ── */
+.preview {
+  background: #fafaf9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+.previewTop {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 0;
+  flex-shrink: 0;
+}
+.previewLabel {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; color: #a89f93;
+  text-transform: uppercase;
+}
+.pollBadge {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9px; color: #6b6560;
+  background: #fff; border: 1px solid #e5e3de;
+  border-radius: 20px; padding: 2px 8px;
+}
+.pollDot {
+  width: 5px; height: 5px;
+  border-radius: 50%; background: #00b894;
+  animation: pollBlink 2s ease-in-out infinite;
+}
+.diagramArea {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+}
+.diagramArea svg {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: block;
+}
+.legend {
+  display: flex; gap: 12px; justify-content: center;
+  padding: 6px 0 10px;
+  font-size: 10px; color: #6b6560; align-items: center;
+  border-top: 1px solid #eceae6;
+  flex-shrink: 0;
+}
+.legendDot {
+  width: 7px; height: 7px; border-radius: 50%;
+  display: inline-block; margin-right: 3px;
+}
+
+@keyframes pollBlink   { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes glowRed     { 0%,100%{filter:drop-shadow(0 0 2px #e1705566)} 50%{filter:drop-shadow(0 0 8px #e17055cc)} }
+@keyframes glowAmber   { 0%,100%{opacity:0.85} 50%{opacity:1} }
+@keyframes edgeFlicker { 0%,100%{opacity:0.4;stroke-width:1} 50%{opacity:0.9;stroke-width:2} }
+
+.nodeRed   { animation: glowRed 2s ease-in-out infinite; }
+.nodeAmber { animation: glowAmber 2s ease-in-out infinite; }
+.edgeRed   { animation: edgeFlicker 3s ease-in-out infinite; }
+.edgeAmber { opacity: 0.7; }

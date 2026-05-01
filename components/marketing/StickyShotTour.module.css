@@ -1,0 +1,228 @@
+/* ---- Two-col sticky layout ---- */
+.tour {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-12, 48px);
+  align-items: start;
+}
+
+/* Left: sticky */
+.sticky-col {
+  position: sticky;
+  align-self: start; /* required for sticky inside CSS Grid */
+}
+
+/* Browser frame */
+.browser-frame {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #dddad5;
+  position: relative;
+}
+
+.browser-chrome {
+  background: #f0ede8;
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #dddad5;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.browser-url {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #dddad5;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #6b6560;
+  font-family: var(--font-mono);
+}
+
+/* Progress dots — top-right inside chrome */
+.frame-progress {
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  z-index: 10;
+}
+
+.frame-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8c4be;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.frame-dot-active {
+  composes: frame-dot;
+  background: var(--accent, #7c6af7);
+  transform: scale(1.5);
+}
+
+/* Viewport clips the sliding screens */
+.mock-viewport {
+  position: relative;
+  overflow: hidden;
+  height: 420px;
+}
+
+/* Individual screens */
+.mock-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 420ms cubic-bezier(0.4,0,0.2,1), opacity 420ms ease;
+  overflow: hidden;
+}
+
+.mock-screen-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mock-screen-exit-up {
+  transform: translateY(-105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mock-screen-exit-down {
+  transform: translateY(105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mock-screen-enter-down {
+  transform: translateY(105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mock-screen-enter-up {
+  transform: translateY(-105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mock-screen-hidden {
+  transform: translateY(105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Right: scrolling copy ---- */
+.copy-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-step {
+  padding: 52px 0;
+  border-bottom: 1px solid var(--border, #e0e0e8);
+  transition: opacity 0.3s;
+}
+
+.feature-step:first-child { padding-top: 0; }
+.feature-step:last-child  { border-bottom: none; padding-bottom: 100px; }
+
+.feature-step-active  { opacity: 1; }
+.feature-step-dimmed  { opacity: 0.35; }
+
+.feat-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 11px);
+  font-weight: 600;
+  color: var(--accent, #5b4fe9);
+  background: var(--accent-subtle, rgba(91,79,233,0.1));
+  border-radius: 99px;
+  padding: 3px 10px;
+  margin-bottom: 14px;
+}
+
+.feat-heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-h3, 24px);
+  font-weight: 600;
+  color: var(--text, #111);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.feat-subhead {
+  font-size: var(--text-body, 15px);
+  color: var(--text-muted, #555);
+  line-height: var(--leading-body, 1.65);
+  margin-bottom: 16px;
+}
+
+.feat-caps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feat-caps li {
+  font-size: var(--text-sm, 14px);
+  color: var(--text-muted, #555);
+  padding-left: 22px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.feat-caps li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success, #22c55e);
+  font-weight: 600;
+}
+
+.feat-tagline {
+  font-size: var(--text-sm, 13px);
+  color: var(--text-subtle, #999);
+  font-style: italic;
+  border-top: 1px solid var(--border, #e0e0e8);
+  padding-top: 12px;
+  margin: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 767px) {
+  .tour {
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 32px);
+  }
+  .sticky-col {
+    position: static; /* disable sticky on mobile */
+  }
+}

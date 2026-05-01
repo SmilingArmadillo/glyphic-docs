@@ -1,0 +1,28 @@
+/* src/components/GlyphField/RippleField.css */
+
+.ripple-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: auto;
+  --ripple-ink: #1a1712;
+}
+
+.ripple-field .rf-floater {
+  position: absolute;
+  transform-origin: center;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+  color: var(--ripple-ink);
+}
+
+.ripple-field .rf-floater svg {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ripple-field .rf-floater {
+    opacity: 0.25 !important;
+  }
+}

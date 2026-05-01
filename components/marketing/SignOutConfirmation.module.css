@@ -1,0 +1,157 @@
+/* ── Modal overlay (desktop / tablet ≥ 768px) ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 14, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.18s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    animation: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2rem 1.5rem;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  animation: scaleIn 0.18s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.97); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.checkCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: #DCFCE7;
+  color: var(--success);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.4rem;
+  font-family: var(--font-sans);
+}
+
+.sub {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: var(--leading-body);
+  margin: 0 0 1rem;
+}
+
+.progressTrack {
+  height: 3px;
+  background: var(--surface-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  animation: drain 3s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressBar {
+    animation: none;
+    width: 0;
+  }
+}
+
+@keyframes drain {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
+}
+
+/* ── Toast pill (mobile < 768px) ── */
+/* Hidden on desktop; shown only on mobile */
+.toast {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}
+
+/* Show toast on mobile, hide modal */
+@media (max-width: 767px) {
+  .overlay {
+    display: none;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1A1A18;
+    color: #FAFAF7;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    font-family: var(--font-sans);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    animation: slideUp 0.2s ease forwards;
+  }
+}
+
+.toastDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

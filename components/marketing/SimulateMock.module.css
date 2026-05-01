@@ -1,0 +1,98 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  height: 100%;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* ── Left: dark code panel ── */
+.code {
+  background: #1a1714;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid #2e2a26;
+}
+.codeLabel {
+  flex-shrink: 0;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; color: #6b6560;
+  text-transform: uppercase;
+  padding: 10px 12px 6px;
+}
+.codeBody {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 12px 12px;
+  font-size: 10px;
+  line-height: 1.7;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  white-space: pre;
+  color: #a89f93;
+}
+
+/* ── Right: light preview panel ── */
+.preview {
+  background: #fafaf9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+.previewTop {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 0;
+  flex-shrink: 0;
+}
+.previewLabel {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; color: #a89f93;
+  text-transform: uppercase;
+}
+.simBadge {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; color: #6b6560;
+  background: #fff; border: 1px solid #e5e3de;
+  border-radius: 20px; padding: 3px 10px;
+}
+.simDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #6c5ce7;
+  animation: simBlink 1s ease-in-out infinite;
+}
+.diagramArea {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+}
+.diagramArea svg {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: block;
+}
+
+/* Throughput bars */
+.tputWrap {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 6px 14px 10px;
+  border-top: 1px solid #eceae6;
+  flex-shrink: 0;
+}
+.tputRow { display: flex; align-items: center; gap: 8px; }
+.tputLabel { width: 40px; text-align: right; font-size: 10px; font-weight: 600; color: #6b6560; }
+.tputTrack { flex: 1; height: 5px; background: #eceae6; border-radius: 3px; overflow: hidden; }
+.tputFill { height: 100%; border-radius: 3px; }
+.tputVal { width: 52px; font-size: 10px; color: #a89f93; white-space: nowrap; }
+
+/* Animations */
+@keyframes simBlink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes saturate { 0%,100%{filter:drop-shadow(0 0 2px #e1705566)} 50%{filter:drop-shadow(0 0 8px #e17055cc)} }
+
+.nodeRed { animation: saturate 1.8s ease-in-out infinite; }
