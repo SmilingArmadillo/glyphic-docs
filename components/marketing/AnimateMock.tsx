@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './AnimateMock.module.css'
 
 export default function AnimateMock() {

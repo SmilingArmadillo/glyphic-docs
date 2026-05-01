@@ -1,6 +1,5 @@
 'use client'
 
-// src/components/GlyphField/RippleField.tsx
 import { useEffect, useRef, type RefObject } from 'react'
 import { GLYPHS, buildGlyphSvg } from './glyphs'
 import './RippleField.css'

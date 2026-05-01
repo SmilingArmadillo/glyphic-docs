@@ -25,5 +25,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [blogIndex, ...blogPages, ...docPages]
+  const marketingPages: MetadataRoute.Sitemap = [
+    { url: 'https://glyphic.cc/', lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
+    { url: 'https://glyphic.cc/pricing', lastModified: new Date('2026-04-22'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: 'https://glyphic.cc/examples', lastModified: new Date('2026-04-22'), changeFrequency: 'weekly', priority: 0.7 },
+    { url: 'https://glyphic.cc/use-cases', lastModified: new Date('2026-04-22'), changeFrequency: 'weekly', priority: 0.7 },
+    { url: 'https://glyphic.cc/changelog', lastModified: new Date('2026-04-22'), changeFrequency: 'weekly', priority: 0.6 },
+    { url: 'https://glyphic.cc/privacy', lastModified: new Date('2026-04-22'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: 'https://glyphic.cc/terms', lastModified: new Date('2026-04-22'), changeFrequency: 'yearly', priority: 0.3 },
+  ]
+
+  return [...marketingPages, blogIndex, ...blogPages, ...docPages]
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './StatusMock.module.css'
 
 export default function StatusMock() {

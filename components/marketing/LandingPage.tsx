@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
-import type { User } from '@supabase/supabase-js'
 import styles from './LandingPage.module.css'
 import RippleField from './RippleField'
 import BeforeAfterSection from './BeforeAfterSection'
@@ -181,12 +180,7 @@ const FAQ = [
   { q: 'How does sharing work?', a: 'Generate an Editable link (recipients can edit) or a View Only link (diagram only, source hidden).' },
 ]
 
-interface LandingPageProps {
-  user: User | null
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function LandingPage({ user }: LandingPageProps) {
+export default function LandingPage() {
   const heroContentRef = useRef<HTMLDivElement>(null)
 
   return (
