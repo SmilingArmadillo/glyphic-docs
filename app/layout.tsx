@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { RootProvider } from 'fumadocs-ui/provider'
-import DocsNav from '@/components/DocsNav'
 import NavTiming from '@/components/NavTiming'
-import { createSupabaseServerClient } from '@/lib/supabase-server'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -22,10 +20,7 @@ const orgJsonLd = {
   logo: 'https://glyphic.cc/logo.svg',
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -40,7 +35,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <RootProvider>
           <NavTiming />
-          <DocsNav user={user} />
           {children}
         </RootProvider>
       </body>

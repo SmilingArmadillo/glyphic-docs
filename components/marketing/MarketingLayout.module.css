@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg, #faf9f4);
+}
+
+.nav-wrap {
+  padding-inline: var(--space-6, 1.5rem);
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  transition: padding 200ms ease-out, top 200ms ease-out;
+}
+
+.nav-wrap--top {
+  padding-inline: 0;
+  top: 0;
+}
+
+.nav-wrap--static {
+  position: static;
+  top: auto;
+  padding-inline: 0;
+}
+
+.main {
+  flex: 1;
+}
