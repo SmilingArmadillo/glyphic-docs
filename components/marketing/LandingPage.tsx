@@ -39,7 +39,7 @@ const TOUR_STEPS: StickyShotTourStep[] = [
       'configurable polling interval',
       'custom status colors',
     ],
-    tagline: "The diagram updates. Your source doesn&apos;t change.",
+    tagline: "The diagram updates. Your source doesn't change.",
     mock: <StatusMock />,
   },
   {
@@ -363,9 +363,9 @@ GW-->Orders: type=`}<span style={{ color: '#f9e2af' }}>line-flow</span>{`, color
                 <span className={styles['plan-price']}>{price}</span>
                 <span className={styles['plan-per']}>{per}</span>
               </div>
-              <button type="button" className={`${styles['plan-cta']}${featured ? ` ${styles['plan-cta--accent']}` : ''}`}>
+              <Link href="/app" className={`${styles['plan-cta']}${featured ? ` ${styles['plan-cta--accent']}` : ''}`}>
                 {cta}
-              </button>
+              </Link>
               <hr className={styles['plan-divider']} />
               <ul className={styles['plan-features']}>
                 {features.map(({ label, available }) => (
