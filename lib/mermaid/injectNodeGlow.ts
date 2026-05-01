@@ -1,4 +1,3 @@
-// src/utils/injectNodeGlow.ts
 import { parseSvgDoc } from './parseSvgDoc'
 import { normalizeNodeId } from './parseMetaBlocks'
 import { findNodeGroup, findClusterGroup, findPrimaryShape, findClusterRect, ensureDefs } from './svgShapeUtils'

@@ -1,4 +1,3 @@
-// src/utils/parseMetaBlocks/index.ts
 // Pure string-only utility — no DOM APIs (document, window, DOMParser, XMLSerializer).
 // Must be importable and runnable in Node.js without a browser shim.
 
