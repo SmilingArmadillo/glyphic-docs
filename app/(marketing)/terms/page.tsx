@@ -1,4 +1,11 @@
+import type { Metadata } from 'next'
+
 export const dynamic = 'force-static'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'Glyphic Terms of Service — the rules governing use of the Glyphic platform.',
+}
 
 export default function TermsPage() {
   return (
