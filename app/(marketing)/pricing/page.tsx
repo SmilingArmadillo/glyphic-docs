@@ -1,4 +1,11 @@
+import type { Metadata } from 'next'
+
 export const dynamic = 'force-static'
+
+export const metadata: Metadata = {
+  title: 'Pricing',
+  description: 'Simple, transparent pricing for Glyphic. Start free, upgrade when you need more.',
+}
 
 export default function PricingPage() {
   return (
