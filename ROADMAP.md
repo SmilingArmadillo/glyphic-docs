@@ -6,9 +6,10 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 ## Open Issues
 
-| #  | Title                                 | Label     | Status |
-|----|---------------------------------------|-----------|--------|
-| #9  | fix: docs page typography and spacing          | type: bug | Open |
+| #   | Title                                                                                         | Label     | Status |
+|-----|-----------------------------------------------------------------------------------------------|-----------|--------|
+| #9  | fix: docs page typography and spacing                                                         | type: bug | Open   |
+| #15 | fix: replace supabase.auth.getUser() with getSession() in layouts to eliminate navigation RTT | type: bug | Open   |
 
 ## Recently Closed
 
