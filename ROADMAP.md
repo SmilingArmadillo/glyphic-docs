@@ -9,12 +9,12 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 | #  | Title                                 | Label     | Status |
 |----|---------------------------------------|-----------|--------|
 | #9  | fix: docs page typography and spacing          | type: bug | Open |
-| #14 | fix: landing page layout and visual polish     | type: bug | Open |
 
 ## Recently Closed
 
 | #   | Title                                                       | Closed     |
 |-----|-------------------------------------------------------------|------------|
+| #14 | fix: landing page layout and visual polish                          | 2026-05-04 |
 | #11 | feat: cookie-based auth for server-side nav state (eliminate flash) | 2026-04-24 |
 | #10 | fix: ThemeToggle aria-hidden hydration mismatch in DocsNav  | 2026-04-23 |
 | #8  | fix: dark mode text legibility issues                       | 2026-04-22 |
