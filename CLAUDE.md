@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Scope
+
+Only edit files within this repository (`glyphic-docs`). Never read, modify, or create files in other repositories (e.g. `mermaid-studio`) unless the user explicitly grants permission for that specific task.
+
 ## Issue Tracking
 
 Every work item must have a GitHub issue and a `ROADMAP.md` entry. Use the `issue-tracking` skill — it covers the exact steps for opening and closing issues and keeping `ROADMAP.md` in sync.

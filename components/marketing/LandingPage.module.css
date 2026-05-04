@@ -523,7 +523,8 @@
   margin-top: var(--space-3);
 }
 
-.section-title-dark em {
+.section-title-dark em,
+.section-title em {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;

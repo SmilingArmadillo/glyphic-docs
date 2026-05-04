@@ -108,7 +108,7 @@ h1, h2, h3, h4, h5, h6 {
   --space-24: 96px;
 
   /* Layout */
-  --container-max:   1200px;
+  --container-max:   1080px;
   --container-prose: 640px;
 
   /* Typography — scale */
@@ -116,24 +116,24 @@ h1, h2, h3, h4, h5, h6 {
   --text-sm:      13px;
   --text-body:    15px;
   --text-h3:      20px;
-  --text-h2:      28px;
-  --text-display: clamp(40px, 5.5vw, 72px);
+  --text-h2:      clamp(32px, 4.5vw, 52px);
+  --text-display: clamp(48px, 7vw, 80px);
 
   /* Typography — leading */
   --leading-body:    1.65;
-  --leading-heading: 1.15;
-  --leading-display: 1.08;
+  --leading-heading: 1.08;
+  --leading-display: 1.04;
   --leading-tight:   1.2;
 
   /* Typography — tracking */
   --tracking-tight:        -0.03em;
   --tracking-snug:         -0.015em;
   --tracking-wide:          0.08em;
-  --tracking-loose-italic:  0.01em;
+  --tracking-loose-italic: -0.02em;
 
   /* Fonts */
-  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans:  'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-mono:  ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
 
   /* Border radius */
@@ -152,11 +152,11 @@ h1, h2, h3, h4, h5, h6 {
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
 
   /* Marketing colour palette — light */
-  --bg:              #faf9f4;
+  --bg:              #FAFAF7;
   --bg-dark:         #111110;
   --surface:         #ffffff;
-  --surface-1:       #f5f4ef;
-  --surface-2:       #eeece5;
+  --surface-1:       #F2F0EA;
+  --surface-2:       #F2F0EA;
   --surface-dark:    rgba(255,255,255,0.06);
   --text:            #111110;
   --text-muted:      #555550;

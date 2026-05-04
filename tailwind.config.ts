@@ -13,7 +13,6 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        serif: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
