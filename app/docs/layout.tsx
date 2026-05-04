@@ -13,10 +13,10 @@ export default async function Layout({ children }: { children: ReactNode }) {
   end()
   console.log(`[docs/layout] pageTree size: ${treeSize} bytes`)
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { session } } = await supabase.auth.getSession()
   return (
     <>
-      <DocsNav user={user} />
+      <DocsNav user={session?.user ?? null} />
       <DocsLayout tree={source.pageTree} {...baseOptions}>
         {children}
       </DocsLayout>
