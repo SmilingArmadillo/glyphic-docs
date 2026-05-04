@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Typography — scale */
   --text-xs:      11px;
-  --text-sm:      13px;
+  --text-sm:      0.875rem;
   --text-body:    15px;
   --text-h3:      20px;
   --text-h2:      clamp(32px, 4.5vw, 52px);
