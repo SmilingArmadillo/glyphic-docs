@@ -9,12 +9,12 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 | #   | Title                                                                                         | Label     | Status |
 |-----|-----------------------------------------------------------------------------------------------|-----------|--------|
 | #9  | fix: docs page typography and spacing                                                         | type: bug | Open   |
-| #18 | fix: TopNav CSS Modules class name hydration mismatch                                         | type: bug | Open   |
 
 ## Recently Closed
 
 | #   | Title                                                                                         | Closed     |
 |-----|-----------------------------------------------------------------------------------------------|------------|
+| #18 | fix: TopNav CSS Modules class name hydration mismatch                                         | 2026-05-04 |
 | #17 | fix: match /docs and /blog background to landing page warm cream                              | 2026-05-05 |
 | #15 | fix: replace supabase.auth.getUser() with getSession() in layouts to eliminate navigation RTT | 2026-05-04 |
 | #16 | fix: match marketing landing page typography to mermaid-studio reference                      | 2026-05-04 |
