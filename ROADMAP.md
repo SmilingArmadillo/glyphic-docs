@@ -10,6 +10,7 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 |-----|-----------------------------------------------------------------------------------------------|-----------|--------|
 | #9  | fix: docs page typography and spacing                                                         | type: bug | Open   |
 | #15 | fix: replace supabase.auth.getUser() with getSession() in layouts to eliminate navigation RTT | type: bug | Open   |
+| #16 | fix: match marketing landing page typography to mermaid-studio reference                      | type: bug | Open   |
 
 ## Recently Closed
 
