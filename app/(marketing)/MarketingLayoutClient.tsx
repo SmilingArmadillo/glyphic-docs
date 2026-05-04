@@ -19,7 +19,7 @@ export default function MarketingLayoutClient({ user, children }: Props) {
 
   useEffect(() => {
     if (!isLanding) {
-      // atTop is unused on non-landing pages; reset to default for if user navigates back to landing
+      // atTop does not affect nav style on non-landing pages; set false defensively.
       setAtTop(false)
       return
     }
@@ -31,7 +31,7 @@ export default function MarketingLayoutClient({ user, children }: Props) {
 
   const navWrapClass = [
     styles['nav-wrap'],
-    !isLanding ? styles['nav-wrap--static'] : atTop ? styles['nav-wrap--top'] : '',
+    !isLanding ? styles['nav-wrap--always-top'] : atTop ? styles['nav-wrap--top'] : '',
   ].filter(Boolean).join(' ')
 
   return (
