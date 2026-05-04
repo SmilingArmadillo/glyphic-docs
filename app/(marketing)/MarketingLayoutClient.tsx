@@ -19,7 +19,8 @@ export default function MarketingLayoutClient({ user, children }: Props) {
 
   useEffect(() => {
     if (!isLanding) {
-      // atTop does not affect nav style on non-landing pages; set false defensively.
+      // atTop does not drive the nav-wrap class or the TopNav prop on non-landing pages
+      // (both short-circuit on !isLanding). Reset to false so state is clean if user navigates back to landing.
       setAtTop(false)
       return
     }
