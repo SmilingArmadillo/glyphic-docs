@@ -88,7 +88,6 @@ export default function RippleField({
     }
 
     let floaters: Floater[] = []
-    let stageRect: DOMRect
 
     function buildFloaters() {
       stage!.innerHTML = ''
@@ -114,7 +113,6 @@ export default function RippleField({
       })
     }
     buildFloaters()
-    stageRect = stage.getBoundingClientRect()
 
     function onMove(e: MouseEvent) {
       const r = stage!.getBoundingClientRect()
@@ -193,7 +191,6 @@ export default function RippleField({
       clearTimeout(resizeTimer)
       resizeTimer = window.setTimeout(() => {
         buildFloaters()
-        stageRect = stage!.getBoundingClientRect()
       }, 200)
     }
     window.addEventListener('resize', onResize)
