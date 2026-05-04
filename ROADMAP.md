@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: 2026-05-04
+Last updated: 2026-05-05
 
 GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/projects/4)
 
@@ -14,6 +14,7 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #   | Title                                                                                         | Closed     |
 |-----|-----------------------------------------------------------------------------------------------|------------|
+| #17 | fix: match /docs and /blog background to landing page warm cream                              | 2026-05-05 |
 | #15 | fix: replace supabase.auth.getUser() with getSession() in layouts to eliminate navigation RTT | 2026-05-04 |
 | #16 | fix: match marketing landing page typography to mermaid-studio reference                      | 2026-05-04 |
 | #14 | fix: landing page layout and visual polish                                                    | 2026-05-04 |
