@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from './LandingPage.module.css'
 import RippleField from './RippleField'
@@ -182,6 +182,10 @@ const FAQ = [
 
 export default function LandingPage() {
   const heroContentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className={styles.page}>
