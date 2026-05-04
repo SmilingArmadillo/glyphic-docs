@@ -34,7 +34,7 @@ export default function MarketingLayoutClient({ user, children }: Props) {
   ].filter(Boolean).join(' ')
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} data-marketing>
       <div className={navWrapClass}>
         <TopNav user={user} atTop={!isLanding || atTop} />
       </div>

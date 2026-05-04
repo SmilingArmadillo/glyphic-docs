@@ -94,6 +94,97 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+/* ---- Marketing design tokens ---- */
+[data-marketing] {
+  /* Spacing scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Layout */
+  --container-max:   1200px;
+  --container-prose: 640px;
+
+  /* Typography — scale */
+  --text-xs:      11px;
+  --text-sm:      13px;
+  --text-body:    15px;
+  --text-h3:      20px;
+  --text-h2:      28px;
+  --text-display: clamp(40px, 5.5vw, 72px);
+
+  /* Typography — leading */
+  --leading-body:    1.65;
+  --leading-heading: 1.15;
+  --leading-display: 1.08;
+  --leading-tight:   1.2;
+
+  /* Typography — tracking */
+  --tracking-tight:        -0.03em;
+  --tracking-snug:         -0.015em;
+  --tracking-wide:          0.08em;
+  --tracking-loose-italic:  0.01em;
+
+  /* Fonts */
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-mono:  ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+
+  /* Marketing colour palette — light */
+  --bg:              #faf9f4;
+  --bg-dark:         #111110;
+  --surface:         #ffffff;
+  --surface-1:       #f5f4ef;
+  --surface-2:       #eeece5;
+  --surface-dark:    rgba(255,255,255,0.06);
+  --text:            #111110;
+  --text-muted:      #555550;
+  --text-subtle:     #999990;
+  --text-on-dark:    #f0efe8;
+  --text-on-dark-muted: rgba(240,239,232,0.55);
+  --border:          #e0ddd4;
+  --border-subtle:   #ebe9e1;
+  --border-strong:   #c8c4b8;
+  --border-on-dark:  rgba(255,255,255,0.10);
+  --accent:          #5b4fe9;
+  --accent-hover:    #4a3fd6;
+  --accent-fg:       #ffffff;
+  --accent-subtle:   rgba(91,79,233,0.08);
+  --success:         #16a34a;
+}
+
+/* ---- Marketing eyebrow utility ---- */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
 /* Scale prose headings down and match muted description color */
 .prose h2 {
   font-size: 1.2em !important;
