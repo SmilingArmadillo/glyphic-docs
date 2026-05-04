@@ -44,6 +44,7 @@ export default function RippleField({
 }: RippleFieldProps) {
   const stageRef = useRef<HTMLDivElement>(null)
   const mouseRef = useRef({ x: -1000, y: -1000, active: false })
+  const rafRef = useRef(0)
 
   useEffect(() => {
     const stage = stageRef.current
@@ -88,7 +89,6 @@ export default function RippleField({
     }
 
     let floaters: Floater[] = []
-    let stageRect: DOMRect
 
     function buildFloaters() {
       stage!.innerHTML = ''
@@ -114,11 +114,11 @@ export default function RippleField({
       })
     }
     buildFloaters()
-    stageRect = stage.getBoundingClientRect()
 
     function onMove(e: MouseEvent) {
-      mouseRef.current.x = e.clientX - stageRect.left
-      mouseRef.current.y = e.clientY - stageRect.top
+      const r = stage!.getBoundingClientRect()
+      mouseRef.current.x = e.clientX - r.left
+      mouseRef.current.y = e.clientY - r.top
       mouseRef.current.active = true
     }
     function onLeave() {
@@ -130,7 +130,6 @@ export default function RippleField({
     stage.addEventListener('mouseleave', onLeave)
 
     const INFLUENCE_RADIUS = 400
-    let raf = 0
 
     function tick(t: number) {
       const { x: mx, y: my, active } = mouseRef.current
@@ -183,16 +182,15 @@ export default function RippleField({
           p.el.style.color = inkColor ?? 'var(--ripple-ink, currentColor)'
         }
       }
-      raf = requestAnimationFrame(tick)
+      rafRef.current = requestAnimationFrame(tick)
     }
-    raf = requestAnimationFrame(tick)
+    rafRef.current = requestAnimationFrame(tick)
 
     let resizeTimer = 0
     function onResize() {
       clearTimeout(resizeTimer)
       resizeTimer = window.setTimeout(() => {
         buildFloaters()
-        stageRect = stage!.getBoundingClientRect()
       }, 200)
     }
     window.addEventListener('resize', onResize)
@@ -202,22 +200,22 @@ export default function RippleField({
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     function applyReducedMotion() {
       if (mq.matches) {
-        cancelAnimationFrame(raf)
-        raf = 0
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = 0
         for (const p of floaters) {
           p.el.style.transform = ''
           p.el.style.opacity = '0.3'
           p.el.style.color = inkColor ?? 'var(--ripple-ink, currentColor)'
         }
-      } else if (!raf) {
-        raf = requestAnimationFrame(tick)
+      } else if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(tick)
       }
     }
     applyReducedMotion()
     mq.addEventListener('change', applyReducedMotion)
 
     return () => {
-      cancelAnimationFrame(raf)
+      cancelAnimationFrame(rafRef.current)
       clearTimeout(resizeTimer)
       ro.disconnect()
       stage.removeEventListener('mousemove', onMove)
