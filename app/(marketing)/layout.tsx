@@ -3,7 +3,7 @@ import MarketingLayoutClient from './MarketingLayoutClient'
 
 export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { session } } = await supabase.auth.getSession()
 
-  return <MarketingLayoutClient user={user}>{children}</MarketingLayoutClient>
+  return <MarketingLayoutClient user={session?.user ?? null}>{children}</MarketingLayoutClient>
 }

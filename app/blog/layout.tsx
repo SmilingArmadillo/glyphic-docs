@@ -3,10 +3,10 @@ import { createSupabaseServerClient } from '@/lib/supabase-server'
 
 export default async function BlogLayout({ children }: { children: React.ReactNode }) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { session } } = await supabase.auth.getSession()
   return (
     <>
-      <DocsNav user={user} />
+      <DocsNav user={session?.user ?? null} />
       {children}
     </>
   )
