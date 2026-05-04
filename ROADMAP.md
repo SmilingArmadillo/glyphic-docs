@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: 2026-04-24
+Last updated: 2026-05-04
 
 GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/projects/4)
 
@@ -8,7 +8,8 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 
 | #  | Title                                 | Label     | Status |
 |----|---------------------------------------|-----------|--------|
-| #9 | fix: docs page typography and spacing | type: bug | Open   |
+| #9  | fix: docs page typography and spacing          | type: bug | Open |
+| #14 | fix: landing page layout and visual polish     | type: bug | Open |
 
 ## Recently Closed
 
