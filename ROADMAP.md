@@ -9,6 +9,8 @@ GitHub Project board: [Glyphic Docs](https://github.com/users/SmilingArmadillo/p
 | #   | Title                                                                                         | Label     | Status |
 |-----|-----------------------------------------------------------------------------------------------|-----------|--------|
 | #9  | fix: docs page typography and spacing                                                         | type: bug | Open   |
+| #19 | fix: hero section mouseover effect stops working randomly                                     | type: bug | Open   |
+| #20 | fix: page randomly scrolls to middle on reload                                                | type: bug | Open   |
 
 ## Recently Closed
 
