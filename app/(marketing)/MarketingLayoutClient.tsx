@@ -15,7 +15,7 @@ interface Props {
 export default function MarketingLayoutClient({ user, children }: Props) {
   const pathname = usePathname()
   const isLanding = pathname === '/'
-  const [atTop, setAtTop] = useState(() => isLanding && (typeof window !== 'undefined' ? window.scrollY === 0 : true))
+  const [atTop, setAtTop] = useState(true)
 
   useEffect(() => {
     if (!isLanding) {
