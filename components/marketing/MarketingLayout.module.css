@@ -19,7 +19,6 @@
 }
 
 .nav-wrap--static {
-  position: sticky;
   top: 0;
   padding-inline: 0;
 }

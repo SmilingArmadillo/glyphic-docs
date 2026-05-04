@@ -19,6 +19,7 @@ export default function MarketingLayoutClient({ user, children }: Props) {
 
   useEffect(() => {
     if (!isLanding) {
+      // atTop is unused on non-landing pages; reset to default for if user navigates back to landing
       setAtTop(false)
       return
     }
