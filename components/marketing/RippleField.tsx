@@ -117,8 +117,9 @@ export default function RippleField({
     stageRect = stage.getBoundingClientRect()
 
     function onMove(e: MouseEvent) {
-      mouseRef.current.x = e.clientX - stageRect.left
-      mouseRef.current.y = e.clientY - stageRect.top
+      const r = stage!.getBoundingClientRect()
+      mouseRef.current.x = e.clientX - r.left
+      mouseRef.current.y = e.clientY - r.top
       mouseRef.current.active = true
     }
     function onLeave() {
